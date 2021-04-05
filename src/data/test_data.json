@@ -1,0 +1,326 @@
+[
+  {
+    "case_id": "60673988895dd48b1e3f1b7a",
+    "age": 42,
+    "gender": "male",
+    "BMI": 224
+  },
+  {
+    "case_id": "606739880110fc2b05d0486a",
+    "age": 48,
+    "gender": "male",
+    "BMI": 117
+  },
+  {
+    "case_id": "606739885712f29fd464f0bf",
+    "age": 72,
+    "gender": "male",
+    "BMI": 141
+  },
+  {
+    "case_id": "60673988fb8de005dff17759",
+    "age": 41,
+    "gender": "male",
+    "BMI": 109
+  },
+  {
+    "case_id": "60673988fd72e15643407e4d",
+    "age": 80,
+    "gender": "male",
+    "BMI": 102
+  },
+  {
+    "case_id": "606739ad61cc7e75f1bf9b6f",
+    "age": 68,
+    "gender": "male",
+    "BMI": 242
+  },
+  {
+    "case_id": "606739ad1ef0a00869b89c0d",
+    "age": 49,
+    "gender": "male",
+    "BMI": 185
+  },
+  {
+    "case_id": "606739ad2bdadaa44744a837",
+    "age": 55,
+    "gender": "male",
+    "BMI": 253
+  },
+  {
+    "case_id": "606739ad7a38fa97d20dddaa",
+    "age": 56,
+    "gender": "male",
+    "BMI": 109
+  },
+  {
+    "case_id": "606739ad40eddbd4e86bb659",
+    "age": 42,
+    "gender": "male",
+    "BMI": 185
+  },
+  {
+    "case_id": "606739b80fd0275788af212d",
+    "age": 36,
+    "gender": "male",
+    "BMI": 168
+  },
+  {
+    "case_id": "606739b8a28a4696d0a3d8be",
+    "age": 41,
+    "gender": "male",
+    "BMI": 274
+  },
+  {
+    "case_id": "606739b82ea077fd013bcaa6",
+    "age": 76,
+    "gender": "male",
+    "BMI": 183
+  },
+  {
+    "case_id": "606739b87ecac23f85cbecb4",
+    "age": 50,
+    "gender": "male",
+    "BMI": 271
+  },
+  {
+    "case_id": "606739b8abc5d81c6d5c7002",
+    "age": 48,
+    "gender": "male",
+    "BMI": 208
+  },
+  {
+    "case_id": "606739c136aae8bc584c7c4e",
+    "age": 45,
+    "gender": "male",
+    "BMI": 262
+  },
+  {
+    "case_id": "606739c12bbb61f2a07ac72b",
+    "age": 71,
+    "gender": "male",
+    "BMI": 222
+  },
+  {
+    "case_id": "606739c1cd8074bbee0266cf",
+    "age": 30,
+    "gender": "male",
+    "BMI": 227
+  },
+  {
+    "case_id": "606739c15cdc56720cb3cd3e",
+    "age": 45,
+    "gender": "male",
+    "BMI": 188
+  },
+  {
+    "case_id": "606739c155a6fee19b6c53cb",
+    "age": 40,
+    "gender": "male",
+    "BMI": 240
+  },
+  {
+    "case_id": "606739c1311ac600b3e0a367",
+    "age": 35,
+    "gender": "male",
+    "BMI": 257
+  },
+  {
+    "case_id": "606739cb81da36c7a1310402",
+    "age": 24,
+    "gender": "male",
+    "BMI": 280
+  },
+  {
+    "case_id": "606739cbc5bde5c448d8c87c",
+    "age": 61,
+    "gender": "male",
+    "BMI": 107
+  },
+  {
+    "case_id": "606739cbe6102efa9b9a8223",
+    "age": 61,
+    "gender": "male",
+    "BMI": 247
+  },
+  {
+    "case_id": "606739cbd82ee860374cb98b",
+    "age": 46,
+    "gender": "male",
+    "BMI": 244
+  },
+  {
+    "case_id": "606739cbaf3c88851812b00e",
+    "age": 38,
+    "gender": "male",
+    "BMI": 103
+  },
+  {
+    "case_id": "606739cb7becd4817d749638",
+    "age": 57,
+    "gender": "male",
+    "BMI": 292
+  },
+  {
+    "case_id": "60673988895dd48b1e3f1b7a",
+    "age": 42,
+    "gender": "male",
+    "BMI": 224
+  },
+  {
+    "case_id": "606739880110fc2b05d0486a",
+    "age": 48,
+    "gender": "male",
+    "BMI": 117
+  },
+  {
+    "case_id": "606739885712f29fd464f0bf",
+    "age": 72,
+    "gender": "male",
+    "BMI": 141
+  },
+  {
+    "case_id": "60673988fb8de005dff17759",
+    "age": 41,
+    "gender": "male",
+    "BMI": 109
+  },
+  {
+    "case_id": "60673988fd72e15643407e4d",
+    "age": 80,
+    "gender": "male",
+    "BMI": 102
+  },
+  {
+    "case_id": "606739ad61cc7e75f1bf9b6f",
+    "age": 68,
+    "gender": "male",
+    "BMI": 242
+  },
+  {
+    "case_id": "606739ad1ef0a00869b89c0d",
+    "age": 49,
+    "gender": "male",
+    "BMI": 185
+  },
+  {
+    "case_id": "606739ad2bdadaa44744a837",
+    "age": 55,
+    "gender": "male",
+    "BMI": 253
+  },
+  {
+    "case_id": "606739ad7a38fa97d20dddaa",
+    "age": 56,
+    "gender": "male",
+    "BMI": 109
+  },
+  {
+    "case_id": "606739ad40eddbd4e86bb659",
+    "age": 42,
+    "gender": "male",
+    "BMI": 185
+  },
+  {
+    "case_id": "606739b80fd0275788af212d",
+    "age": 36,
+    "gender": "male",
+    "BMI": 168
+  },
+  {
+    "case_id": "606739b8a28a4696d0a3d8be",
+    "age": 41,
+    "gender": "male",
+    "BMI": 274
+  },
+  {
+    "case_id": "606739b82ea077fd013bcaa6",
+    "age": 76,
+    "gender": "male",
+    "BMI": 183
+  },
+  {
+    "case_id": "606739b87ecac23f85cbecb4",
+    "age": 50,
+    "gender": "male",
+    "BMI": 271
+  },
+  {
+    "case_id": "606739b8abc5d81c6d5c7002",
+    "age": 48,
+    "gender": "male",
+    "BMI": 208
+  },
+  {
+    "case_id": "606739c136aae8bc584c7c4e",
+    "age": 45,
+    "gender": "male",
+    "BMI": 262
+  },
+  {
+    "case_id": "606739c12bbb61f2a07ac72b",
+    "age": 71,
+    "gender": "male",
+    "BMI": 222
+  },
+  {
+    "case_id": "606739c1cd8074bbee0266cf",
+    "age": 30,
+    "gender": "male",
+    "BMI": 227
+  },
+  {
+    "case_id": "606739c15cdc56720cb3cd3e",
+    "age": 45,
+    "gender": "male",
+    "BMI": 188
+  },
+  {
+    "case_id": "606739c155a6fee19b6c53cb",
+    "age": 40,
+    "gender": "male",
+    "BMI": 240
+  },
+  {
+    "case_id": "606739c1311ac600b3e0a367",
+    "age": 35,
+    "gender": "male",
+    "BMI": 257
+  },
+  {
+    "case_id": "606739cb81da36c7a1310402",
+    "age": 24,
+    "gender": "male",
+    "BMI": 280
+  },
+  {
+    "case_id": "606739cbc5bde5c448d8c87c",
+    "age": 61,
+    "gender": "male",
+    "BMI": 107
+  },
+  {
+    "case_id": "606739cbe6102efa9b9a8223",
+    "age": 61,
+    "gender": "male",
+    "BMI": 247
+  },
+  {
+    "case_id": "606739cbd82ee860374cb98b",
+    "age": 46,
+    "gender": "male",
+    "BMI": 244
+  },
+  {
+    "case_id": "606739cbaf3c88851812b00e",
+    "age": 38,
+    "gender": "male",
+    "BMI": 103
+  },
+  {
+    "case_id": "606739cb7becd4817d749638",
+    "age": 57,
+    "gender": "male",
+    "BMI": 292
+  }
+]
