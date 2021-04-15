@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import Explore from "./Explore";
+import Explore from "./component/explore/Explore";
 
 function App() {
   return (
