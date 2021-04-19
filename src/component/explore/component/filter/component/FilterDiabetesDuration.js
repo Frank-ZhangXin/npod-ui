@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   slider: {
@@ -14,17 +15,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FilterDiabetesDuration() {
+function FilterDiabetesDuration(props) {
   const classes = useStyles();
-  // DD for Diabetes Duration
-  const [DDRange, setDDRange] = React.useState([0, 80]);
-  const [DDMin, setDDMin] = React.useState(0);
-  const [DDMax, setDDMax] = React.useState(80);
 
   const handleDDRangeSliderChange = (event, newDDRange) => {
-    setDDRange(newDDRange);
-    setDDMin(newDDRange[0]);
-    setDDMax(newDDRange[1]);
+    props.setDDRange(newDDRange);
   };
 
   const handleMinDDInputChange = (event) => {
@@ -32,10 +27,8 @@ export default function FilterDiabetesDuration() {
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
         : 0;
-    newMinDD = newMinDD >= DDMax ? DDMax : newMinDD;
-    setDDMin(newMinDD);
-    const newDDRange = [newMinDD, { DDRange }.DDRange[1]];
-    setDDRange(newDDRange);
+    newMinDD = newMinDD >= props.DDMax ? props.DDMax : newMinDD;
+    props.setDDMin(newMinDD);
   };
 
   const handleMaxDDInputChange = (event) => {
@@ -43,10 +36,8 @@ export default function FilterDiabetesDuration() {
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
         : 100;
-    newMaxDD = newMaxDD <= DDMin ? DDMin : newMaxDD;
-    setDDMax(newMaxDD);
-    const newDDRange = [{ DDRange }.DDRange[0], newMaxDD];
-    setDDRange(newDDRange);
+    newMaxDD = newMaxDD <= props.DDMin ? props.DDMin : newMaxDD;
+    props.setDDMax(newMaxDD);
   };
 
   return (
@@ -57,11 +48,11 @@ export default function FilterDiabetesDuration() {
 
       <Slider
         className={classes.slider}
-        value={DDRange}
+        value={props.DDRange}
         onChange={handleDDRangeSliderChange}
         valueLabelDisplay="auto"
         min={0}
-        max={80}
+        max={85}
         aria-labelledby="dd-range-slider"
       />
       <Grid container spacing={10} alignItems="center" justify="space-around">
@@ -70,15 +61,15 @@ export default function FilterDiabetesDuration() {
             className={classes.textfield}
             id="min-dd-input"
             label="Start"
-            defaultValue={DDMin}
-            value={DDMin}
+            defaultValue={props.DDMin}
+            value={props.DDMin}
             margin="dense"
             onChange={handleMinDDInputChange}
             helperText="Years"
             inputProps={{
               step: 1,
               min: 0,
-              max: 80,
+              max: 85,
               type: "number",
             }}
           />
@@ -88,15 +79,15 @@ export default function FilterDiabetesDuration() {
             className={classes.textfield}
             id="min-dd-input"
             label="To"
-            defaultValue={DDMax}
-            value={DDMax}
+            defaultValue={props.DDMax}
+            value={props.DDMax}
             margin="dense"
             onChange={handleMaxDDInputChange}
             helperText="Years"
             inputProps={{
               step: 1,
               min: 0,
-              max: 80,
+              max: 85,
               type: "number",
             }}
           />
@@ -105,3 +96,27 @@ export default function FilterDiabetesDuration() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    DDRange: state.DDRange,
+    DDMin: state.DDMin,
+    DDMax: state.DDMax,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setDDRange: (newDDRange) =>
+      dispatch({ type: "SET_DD_RANGE", value: newDDRange }),
+    setDDMin: (newDDMin) => dispatch({ type: "SET_DD_MIN", value: newDDMin }),
+    setDDMax: (newDDMax) => dispatch({ type: "SET_DD_MAX", value: newDDMax }),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FilterDiabetesDuration);

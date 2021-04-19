@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   slider: {
@@ -14,17 +15,11 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FilterAge() {
+function FilterAge(props) {
   const classes = useStyles();
 
-  const [ageRange, setAgeRange] = React.useState([0, 65]);
-  const [ageMin, setAgeMin] = React.useState(0);
-  const [ageMax, setAgeMax] = React.useState(65);
-
   const handleAgeRangeSliderChange = (event, newAgeRange) => {
-    setAgeRange(newAgeRange);
-    setAgeMin(newAgeRange[0]);
-    setAgeMax(newAgeRange[1]);
+    props.setAgeRange(newAgeRange);
   };
 
   const handleMinAgeInputChange = (event) => {
@@ -32,10 +27,8 @@ export default function FilterAge() {
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
         : 0;
-    newMinAge = newMinAge >= ageMax ? ageMax : newMinAge;
-    setAgeMin(newMinAge);
-    const newAgeRange = [newMinAge, { ageRange }.ageRange[1]];
-    setAgeRange(newAgeRange);
+    newMinAge = newMinAge >= props.ageMax ? props.ageMax : newMinAge;
+    props.setAgeMin(newMinAge);
   };
 
   const handleMaxAgeInputChange = (event) => {
@@ -43,10 +36,8 @@ export default function FilterAge() {
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
         : 100;
-    newMaxAge = newMaxAge <= ageMin ? ageMin : newMaxAge;
-    setAgeMax(newMaxAge);
-    const newAgeRange = [{ ageRange }.ageRange[0], newMaxAge];
-    setAgeRange(newAgeRange);
+    newMaxAge = newMaxAge <= props.ageMin ? props.ageMin : newMaxAge;
+    props.setAgeMax(newMaxAge);
   };
 
   return (
@@ -57,11 +48,11 @@ export default function FilterAge() {
 
       <Slider
         className={classes.slider}
-        value={ageRange}
+        value={props.ageRange}
         onChange={handleAgeRangeSliderChange}
         valueLabelDisplay="auto"
         min={0}
-        max={65}
+        max={95}
         aria-labelledby="age-range-slider"
       />
       <Grid container spacing={10} alignItems="center" justify="space-around">
@@ -70,14 +61,14 @@ export default function FilterAge() {
             className={classes.textfield}
             id="min-age-input"
             label="Start"
-            defaultValue={ageMin}
-            value={ageMin}
+            defaultValue={props.ageMin}
+            value={props.ageMin}
             margin="dense"
             onChange={handleMinAgeInputChange}
             inputProps={{
               step: 1,
               min: 0,
-              max: 65,
+              max: 95,
               type: "number",
             }}
           />
@@ -87,14 +78,14 @@ export default function FilterAge() {
             className={classes.textfield}
             id="min-age-input"
             label="To"
-            defaultValue={ageMax}
-            value={ageMax}
+            defaultValue={props.ageMax}
+            value={props.ageMax}
             margin="dense"
             onChange={handleMaxAgeInputChange}
             inputProps={{
               step: 1,
               min: 0,
-              max: 65,
+              max: 95,
               type: "number",
             }}
           />
@@ -103,3 +94,26 @@ export default function FilterAge() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    ageRange: state.ageRange,
+    ageMin: state.ageMin,
+    ageMax: state.ageMax,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAgeRange: (newAgeRange) =>
+      dispatch({ type: "SET_AGE_RANGE", value: newAgeRange }),
+    setAgeMin: (newAgeMin) =>
+      dispatch({ type: "SET_AGE_MIN", value: newAgeMin }),
+    setAgeMax: (newAgeMax) =>
+      dispatch({ type: "SET_AGE_MAX", value: newAgeMax }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterAge);

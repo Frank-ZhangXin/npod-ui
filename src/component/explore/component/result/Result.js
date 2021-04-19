@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Result() {
   const classes = useStyles();
-  console.log(testData);
   return (
     <div>
       <Typography variant="h3">SEARCH REASULT</Typography>

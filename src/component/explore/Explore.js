@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Filter from "./component/filter/Filter";
 import Result from "./component/result/Result";
-import testData from "../../data/test_case_data_0407.json";
+import Search from "./component/search/Search";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,6 +38,7 @@ export default function Explore() {
             }}
             className={classes.paper}
           >
+            <Search />
             <Result />
           </Paper>
         </Grid>
