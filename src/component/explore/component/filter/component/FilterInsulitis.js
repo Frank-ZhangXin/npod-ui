@@ -5,6 +5,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   formGroup: {
@@ -13,15 +14,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FilterInsulitis() {
+function FilterInsulitis(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    positiveChecked: true,
-    negativeChecked: false,
-  });
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
     <div>
@@ -33,8 +27,10 @@ export default function FilterInsulitis() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.positiveChecked}
-                onChange={handleChange}
+                checked={props.insulitisPositiveChecked}
+                onChange={(event) =>
+                  props.setInsulitisPositiveChecked(event.target.checked)
+                }
                 name="positiveChecked"
                 color="primary"
               />
@@ -46,8 +42,10 @@ export default function FilterInsulitis() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.negativeChecked}
-                onChange={handleChange}
+                checked={props.insulitisNegativeChecked}
+                onChange={(event) =>
+                  props.setInsulitisNegativeChecked(event.target.checked)
+                }
                 name="negativeChecked"
                 color="secondary"
               />
@@ -59,3 +57,23 @@ export default function FilterInsulitis() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    insulitisPositiveChecked: state.insulitisPositiveChecked,
+    insulitisNegativeChecked: state.insulitisNegativeChecked,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setInsulitisPositiveChecked: (checked) =>
+      dispatch({ type: "SET_INSULITIS_POSITIVE_CHECKED", value: checked }),
+    setInsulitisNegativeChecked: (checked) =>
+      dispatch({ type: "SET_INSULITIS_NEGATIVE_CHECKED", value: checked }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterInsulitis);

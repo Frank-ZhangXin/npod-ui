@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   slider: {
@@ -14,17 +15,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FilterHbA1c() {
+function FilterHbA1c(props) {
   const classes = useStyles();
 
-  const [hRange, setHRange] = React.useState([4.4, 13.9]);
-  const [hMin, setHMin] = React.useState(4.4);
-  const [hMax, setHMax] = React.useState(13.9);
-
   const handleAgeRangeSliderChange = (event, newHRange) => {
-    setHRange(newHRange);
-    setHMin(newHRange[0]);
-    setHMax(newHRange[1]);
+    props.setHRange(newHRange);
+    props.setHMin(newHRange[0]);
+    props.setHMax(newHRange[1]);
   };
 
   const handleMinHInputChange = (event) => {
@@ -32,10 +29,8 @@ export default function FilterHbA1c() {
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
         : 0;
-    newMinH = newMinH >= hMax ? hMax : newMinH;
-    setHMin(newMinH);
-    const newHRange = [newMinH, { hRange }.hRange[1]];
-    setHRange(newHRange);
+    newMinH = newMinH >= props.hMax ? props.hMax : newMinH;
+    props.setHMin(newMinH);
   };
 
   const handleMaxHInputChange = (event) => {
@@ -43,25 +38,23 @@ export default function FilterHbA1c() {
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
         : 100;
-    newMaxH = newMaxH <= hMin ? hMin : newMaxH;
-    setHMax(newMaxH);
-    const newHRange = [{ hRange }.hRange[0], newMaxH];
-    setHRange(newHRange);
+    newMaxH = newMaxH <= props.hMin ? props.hMin : newMaxH;
+    props.setHMax(newMaxH);
   };
 
   return (
     <div>
       <Typography id="age-range-slider" gutterBottom>
-        <h4>Hb1A1c Range</h4>
+        <h4>Hb1A1c % Range</h4>
       </Typography>
 
       <Slider
         className={classes.slider}
-        value={hRange}
+        value={props.hRange}
         onChange={handleAgeRangeSliderChange}
         valueLabelDisplay="auto"
-        min={4.4}
-        max={13.9}
+        min={2.0}
+        max={20.0}
         step={0.1}
         aria-labelledby="h-range-slider"
       />
@@ -71,14 +64,14 @@ export default function FilterHbA1c() {
             className={classes.textfield}
             id="min-h-input"
             label="Start"
-            defaultValue={hMin}
-            value={hMin}
+            defaultValue={props.hMin}
+            value={props.hMin}
             margin="dense"
             onChange={handleMinHInputChange}
             inputProps={{
               step: 0.1,
-              min: 4.4,
-              max: 13.9,
+              min: 2.0,
+              max: 20.0,
               type: "number",
             }}
           />
@@ -88,14 +81,14 @@ export default function FilterHbA1c() {
             className={classes.textfield}
             id="min-h-input"
             label="To"
-            defaultValue={hMax}
-            value={hMax}
+            defaultValue={props.hMax}
+            value={props.hMax}
             margin="dense"
             onChange={handleMaxHInputChange}
             inputProps={{
               step: 0.1,
-              min: 4.4,
-              max: 13.9,
+              min: 2.0,
+              max: 20.0,
               type: "number",
             }}
           />
@@ -104,3 +97,24 @@ export default function FilterHbA1c() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    hRange: state.hRange,
+    hMin: state.hMin,
+    hMax: state.hMax,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setHRange: (newHRange) =>
+      dispatch({ type: "SET_H_RANGE", value: newHRange }),
+    setHMin: (newHMin) => dispatch({ type: "SET_H_MIN", value: newHMin }),
+    setHMax: (newHMax) => dispatch({ type: "SET_H_MAX", value: newHMax }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterHbA1c);

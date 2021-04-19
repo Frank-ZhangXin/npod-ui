@@ -5,6 +5,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   formGroup: {
@@ -13,15 +14,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FilterGender() {
+function FilterGender(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    maleChecked: true,
-    femaleChecked: true,
-  });
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
     <div>
@@ -33,8 +27,8 @@ export default function FilterGender() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.maleChecked}
-                onChange={handleChange}
+                checked={props.maleChecked}
+                onChange={(event) => props.setMaleChecked(event.target.checked)}
                 name="maleChecked"
                 color="primary"
               />
@@ -46,8 +40,10 @@ export default function FilterGender() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.femaleChecked}
-                onChange={handleChange}
+                checked={props.femaleChecked}
+                onChange={(event) =>
+                  props.setFemaleChecked(event.target.checked)
+                }
                 name="femaleChecked"
                 color="secondary"
               />
@@ -59,3 +55,23 @@ export default function FilterGender() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    maleChecked: state.maleChecked,
+    femaledChecked: state.femaleChecked,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setMaleChecked: (checked) =>
+      dispatch({ type: "SET_MALE_CHECKED", value: checked }),
+    setFemaleChecked: (checked) =>
+      dispatch({ type: "SET_FEMALE_CHECKED", value: checked }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterGender);

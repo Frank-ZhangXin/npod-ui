@@ -1,42 +1,48 @@
 import React, { setState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   formGroup: {
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-export default function FilterAutoAntibodyPositiveNumber() {
+function FilterAutoAntibodyPositiveNumber(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    oneChecked: true,
-    twoChecked: false,
-    threeChecked: false,
-    fourCheck: false,
-  });
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
     <div>
-      <Typography id="auto antibody number" gutterBottom>
-        <h4>Auto Antibody Positive</h4>
-      </Typography>
+      <h4>Auto Antibody Positive</h4>
+
       <FormGroup row className={classes.formGroup}>
         <Box>
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.oneChecked}
-                onChange={handleChange}
+                checked={props.zeroChecked}
+                onChange={(event) => props.setZeroChecked(event.target.checked)}
+                name="zeroChecked"
+                color="default"
+              />
+            }
+            label="0"
+          />
+        </Box>
+
+        <Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={props.oneChecked}
+                onChange={(event) => props.setOneChecked(event.target.checked)}
                 name="oneChecked"
                 color="default"
               />
@@ -44,12 +50,13 @@ export default function FilterAutoAntibodyPositiveNumber() {
             label="1"
           />
         </Box>
+
         <Box>
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.twoChecked}
-                onChange={handleChange}
+                checked={props.twoChecked}
+                onChange={(event) => props.setTwoChecked(event.target.checked)}
                 name="twoChecked"
                 color="default"
               />
@@ -57,12 +64,15 @@ export default function FilterAutoAntibodyPositiveNumber() {
             label="2"
           />
         </Box>
+
         <Box>
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.threeChecked}
-                onChange={handleChange}
+                checked={props.threeChecked}
+                onChange={(event) =>
+                  props.setThreeChecked(event.target.checked)
+                }
                 name="threeChecked"
                 color="default"
               />
@@ -70,12 +80,13 @@ export default function FilterAutoAntibodyPositiveNumber() {
             label="3"
           />
         </Box>
+
         <Box>
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.fourChecked}
-                onChange={handleChange}
+                checked={props.fourChecked}
+                onChange={(event) => props.setFourChecked(event.target.checked)}
                 name="fourChecked"
                 color="default"
               />
@@ -87,3 +98,35 @@ export default function FilterAutoAntibodyPositiveNumber() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    zeroChecked: state.zeroChecked,
+    oneChecked: state.oneChecked,
+    twoChecked: state.twoChecked,
+    threeChecked: state.threeChecked,
+    fourChecked: state.fourChecked,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setZeroChecked: (checked) =>
+      dispatch({ type: "SET_ZERO_CHECKED", value: checked }),
+    setOneChecked: (checked) =>
+      dispatch({ type: "SET_ONE_CHECKED", value: checked }),
+    setTwoChecked: (checked) =>
+      dispatch({ type: "SET_TWO_CHECKED", value: checked }),
+    setThreeChecked: (checked) =>
+      dispatch({ type: "SET_THREE_CHECKED", value: checked }),
+    setFourChecked: (checked) =>
+      dispatch({ type: "SET_FOUR_CHECKED", value: checked }),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FilterAutoAntibodyPositiveNumber);

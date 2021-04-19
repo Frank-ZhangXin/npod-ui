@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
   slider: {
@@ -14,39 +15,33 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FilterBMI() {
+function FilterBMI(props) {
   const classes = useStyles();
 
-  const [bmiRange, setBmiRange] = React.useState([0, 45.49]);
-  const [bmiMin, setBmiMin] = React.useState(0);
-  const [bmiMax, setBmiMax] = React.useState(45.49);
+  const [bmiRange, setBmiRange] = React.useState([5.0, 60.0]);
+  const [bmiMin, setBmiMin] = React.useState(5.0);
+  const [bmiMax, setBmiMax] = React.useState(60.0);
 
   const handleBMIRangeSliderChange = (event, newBmiRange) => {
-    setBmiRange(newBmiRange);
-    setBmiMin(newBmiRange[0]);
-    setBmiMax(newBmiRange[1]);
+    props.setBmiRange(newBmiRange);
   };
 
   const handleMinBmiInputChange = (event) => {
     let newMinBmi =
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
-        : 0;
-    newMinBmi = newMinBmi >= bmiMax ? bmiMax : newMinBmi;
-    setBmiMin(newMinBmi);
-    const newBmiRange = [newMinBmi, { bmiRange }.bmiRange[1]];
-    setBmiRange(newBmiRange);
+        : 5.0;
+    newMinBmi = newMinBmi >= props.bmiMax ? props.bmiMax : newMinBmi;
+    props.setBmiMin(newMinBmi);
   };
 
   const handleMaxBmiInputChange = (event) => {
     let newBmiAge =
       typeof Number(event.target.value) === "number"
         ? Number(event.target.value)
-        : 50;
-    newBmiAge = newBmiAge <= bmiMin ? bmiMin : newBmiAge;
-    setBmiMax(newBmiAge);
-    const newBmiRange = [{ bmiRange }.bmiRange[0], newBmiAge];
-    setBmiRange(newBmiRange);
+        : 60.0;
+    newBmiAge = newBmiAge <= props.bmiMin ? props.bmiMin : newBmiAge;
+    props.setBmiMax(newBmiAge);
   };
 
   return (
@@ -57,11 +52,11 @@ export default function FilterBMI() {
 
       <Slider
         className={classes.slider}
-        value={bmiRange}
+        value={props.bmiRange}
         onChange={handleBMIRangeSliderChange}
         valueLabelDisplay="auto"
-        min={0}
-        max={45.49}
+        min={5.0}
+        max={60.0}
         step={0.1}
         aria-labelledby="bmi-range-slider"
       />
@@ -71,14 +66,14 @@ export default function FilterBMI() {
             className={classes.textfield}
             id="min-age-input"
             label="Start"
-            defaultValue={bmiMin}
-            value={bmiMin}
+            defaultValue={props.bmiMin}
+            value={props.bmiMin}
             margin="dense"
             onChange={handleMinBmiInputChange}
             inputProps={{
               step: 0.1,
-              min: 0,
-              max: 45.49,
+              min: 0.0,
+              max: 60.0,
               type: "number",
             }}
           />
@@ -88,14 +83,14 @@ export default function FilterBMI() {
             className={classes.textfield}
             id="min-age-input"
             label="To"
-            defaultValue={bmiMax}
-            value={bmiMax}
+            defaultValue={props.bmiMax}
+            value={props.bmiMax}
             margin="dense"
             onChange={handleMaxBmiInputChange}
             inputProps={{
               step: 0.1,
-              min: 0,
-              max: 45.49,
+              min: 0.0,
+              max: 60.0,
               type: "number",
             }}
           />
@@ -104,3 +99,26 @@ export default function FilterBMI() {
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    bmiRange: state.bmiRange,
+    bmiMin: state.bmiMin,
+    bmiMax: state.bmiMax,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setBmiRange: (newRange) =>
+      dispatch({ type: "SET_BMI_RANGE", value: newRange }),
+    setBmiMin: (newBmiMin) =>
+      dispatch({ type: "SET_BMI_MIN", value: newBmiMin }),
+    setBmiMax: (newBmiMax) =>
+      dispatch({ type: "SET_BMI_MAX", value: newBmiMax }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterBMI);

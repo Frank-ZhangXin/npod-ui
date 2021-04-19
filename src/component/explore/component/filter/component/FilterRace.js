@@ -1,75 +1,75 @@
 import React, { setState } from "react";
+import Select from "react-select";
 import { makeStyles } from "@material-ui/core/styles";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import { Box } from "@material-ui/core";
+import makeAnimated from "react-select/animated";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles({
-  formGroup: {
+  multiSelect: {
+    width: "75%",
+  },
+  box: {
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
 });
 
-export default function FilterRace() {
+const options = [
+  { value: "African American", label: "African American" },
+  {
+    value: "American Indian/Alaska Native",
+    label: "American Indian/Alaska Native",
+  },
+  { value: "Arab/Middle Eastern", label: "Arab/Middle Eastern" },
+  { value: "Asian", label: "Asian" },
+  { value: "Caucasian", label: "Caucasian" },
+  {
+    value: "Hawaiian/Other Pacific Islander",
+    label: "Hawaiian/Other Pacific Islander",
+  },
+  { value: "Hispanic/Latino", label: "Hispanic/Latino" },
+  { value: "Multiracial", label: "Multiracial" },
+];
+
+const animatedComponents = makeAnimated();
+
+function FilterRace(props) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    africanAmericanChecked: true,
-    caucasionChecked: true,
-    hispanicChecked: true,
-  });
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
 
   return (
     <div>
-      <Typography id="race" gutterBottom>
-        <h4>Race</h4>
-      </Typography>
-      <FormGroup column className={classes.formGroup}>
-        <Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.africanAmericanChecked}
-                onChange={handleChange}
-                name="africanAmericanChecked"
-                color="primary"
-              />
-            }
-            label="African American"
-          />
-        </Box>
-        <Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.caucasionChecked}
-                onChange={handleChange}
-                name="caucasionChecked"
-                color="secondary"
-              />
-            }
-            label="Caucasion"
-          />
-        </Box>
-        <Box>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={state.hispanicChecked}
-                onChange={handleChange}
-                name="hispanicChecked"
-                color="default"
-              />
-            }
-            label="Hispanic"
-          />
-        </Box>
-      </FormGroup>
+      <h4>Race</h4>
+      <Box className={classes.box}>
+        <Select
+          className={classes.multiSelect}
+          value={props.selectedRace}
+          onChange={(value) => props.setSelectedRace(value)}
+          options={options}
+          isMulti
+          closeMenuOnSelect={false}
+          components={animatedComponents}
+        />
+      </Box>
+      {console.log(props.selectedRace.map((opt) => opt.value))}
     </div>
   );
 }
+
+// subscribe
+const mapStateToProps = (state) => {
+  return {
+    selectedRace: state.selectedRace,
+  };
+};
+
+// update
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setSelectedRace: (newRace) =>
+      dispatch({ type: "SET_SELECTED_RACE", value: newRace }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterRace);

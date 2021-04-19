@@ -4,7 +4,7 @@ import FilterAge from "./component/FilterAge";
 import FilterGender from "./component/FilterGender";
 import FilterRace from "./component/FilterRace";
 import FilterBMI from "./component/FilterBMI";
-import FilterDonnorType from "./component/FilterDonnorType";
+import FilterDonorType from "./component/FilterDonorType";
 import FilterDiabetesDuration from "./component/FilterDiabetesDuration";
 import FilterHbA1c from "./component/FilterHbA1c";
 import FilterAutoAntibody from "./component/FilterAutoAntibody";
@@ -19,7 +19,7 @@ export default function Filter() {
       <FilterGender />
       <FilterRace />
       <FilterBMI />
-      <FilterDonnorType />
+      <FilterDonorType />
       <FilterDiabetesDuration />
       <FilterHbA1c />
       <FilterAutoAntibody />
