@@ -6,6 +6,9 @@ import testData from "../../../../data/test_case_data_0407.json";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
+import { connect } from "react-redux";
+import Search from "./component/Search";
+import FetchRawData from "./component/FetchRawData";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +30,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Result() {
+function Result(props) {
   const classes = useStyles();
   return (
     <div>
+      <FetchRawData />
       <Typography variant="h3">SEARCH REASULT</Typography>
       <div style={{ width: "100%" }}>
         <Box display="flex" justifyContent="flex-end">
@@ -45,15 +49,21 @@ export default function Result() {
           </Box>
         </Box>
       </div>
-      <Grid container spacing={2}>
-        {testData.map((donnorCase) => (
-          <Grid item xs={12} sm={4} md={3} lg={2}>
-            <Paper elevation={3} hover className={classes.paper}>
-              <Typography variant="h5">{donnorCase.case_id}</Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
+      {/* Show search result */}
+      <Search />
     </div>
   );
 }
+
+// Subscribe
+const mapStateToProps = (state) => {
+  return {
+    // Raw Data
+    rawData: state.rawData,
+
+    // Filtered Data
+    filteredData: state.filteredData,
+  };
+};
+
+export default connect(mapStateToProps)(Result);

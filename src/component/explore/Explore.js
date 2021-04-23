@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import Filter from "./component/filter/Filter";
 import Result from "./component/result/Result";
-import Search from "./component/search/Search";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -20,9 +19,9 @@ export default function Explore() {
     <div>
       <Typography variant="h1">CASE EXPLORE</Typography>
       <Grid container spacing={2} justify={"center"} alignItems={"stretch"}>
-        <Grid item xs="12" md="4" lg="2">
+        <Grid item xs={12} md={4} lg={2}>
           <Paper
-            variant="elevation={3}"
+            elevation={3}
             style={{
               width: "100%",
             }}
@@ -30,15 +29,14 @@ export default function Explore() {
             <Filter />
           </Paper>
         </Grid>
-        <Grid item xs="12" md="7" lg="7">
+        <Grid item xs={12} md={7} lg={7}>
           <Paper
-            variant="elevation={3}"
+            elevation={3}
             style={{
               width: "100%",
             }}
             className={classes.paper}
           >
-            <Search />
             <Result />
           </Paper>
         </Grid>

@@ -2,7 +2,6 @@ import React, { setState } from "react";
 import Select from "react-select";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
-import makeAnimated from "react-select/animated";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
@@ -48,8 +47,6 @@ const options = [
   },
 ];
 
-const animatedComponents = makeAnimated();
-
 function FilterDonorType(props) {
   const classes = useStyles();
 
@@ -64,10 +61,8 @@ function FilterDonorType(props) {
           options={options}
           isMulti
           closeMenuOnSelect={false}
-          components={animatedComponents}
         />
       </Box>
-      {console.log(props.selectedDonorType.map((opt) => opt.value))}
     </div>
   );
 }

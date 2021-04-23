@@ -46,9 +46,7 @@ function FilterBMI(props) {
 
   return (
     <div>
-      <Typography id="bmi-range-slider" gutterBottom>
-        <h4>BMI Range</h4>
-      </Typography>
+      <h4>BMI Range</h4>
 
       <Slider
         className={classes.slider}
@@ -66,7 +64,7 @@ function FilterBMI(props) {
             className={classes.textfield}
             id="min-age-input"
             label="Start"
-            defaultValue={props.bmiMin}
+            // defaultValue={props.bmiMin}
             value={props.bmiMin}
             margin="dense"
             onChange={handleMinBmiInputChange}
@@ -83,7 +81,7 @@ function FilterBMI(props) {
             className={classes.textfield}
             id="min-age-input"
             label="To"
-            defaultValue={props.bmiMax}
+            // defaultValue={props.bmiMax}
             value={props.bmiMax}
             margin="dense"
             onChange={handleMaxBmiInputChange}

@@ -19,9 +19,8 @@ function FilterInsulitis(props) {
 
   return (
     <div>
-      <Typography id="auto antibody number" gutterBottom>
-        <h4>Insulitis</h4>
-      </Typography>
+      <h4>Insulitis</h4>
+
       <FormGroup row className={classes.formGroup}>
         <Box mx={2}>
           <FormControlLabel

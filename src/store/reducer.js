@@ -52,6 +52,9 @@ const initialState = {
 
   // Raw Data
   rawData: [],
+
+  // Filtered Data
+  filteredData: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -255,6 +258,14 @@ const reducer = (state = initialState, action) => {
         ...state,
         rawData: action.value,
       };
+
+    // Filtered Data
+    case "SET_FILTERED_DATA":
+      return {
+        ...state,
+        filteredData: action.value,
+      };
+
     default:
       return state;
   }
