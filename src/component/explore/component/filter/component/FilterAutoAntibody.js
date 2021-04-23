@@ -19,16 +19,12 @@ function FilterAutoAntiboy(props) {
 
   return (
     <div>
-      <Typography id="auto antibody">
-        <h4>Auto Antibody</h4>
-      </Typography>
-      <FormGroup column className={classes.formGroup}>
+      <h4>Auto Antibody</h4>
+      <FormGroup className={classes.formGroup}>
         {/* GADA Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
           <Grid item>
-            <Typography gutterBottom>
-              <h5>GADA</h5>
-            </Typography>
+            <h5>GADA</h5>
           </Grid>
           <Grid item>
             <FormControlLabel
@@ -60,9 +56,7 @@ function FilterAutoAntiboy(props) {
         {/* IA2A Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
           <Grid item>
-            <Typography gutterBottom>
-              <h5>IA2A</h5>
-            </Typography>
+            <h5>IA2A</h5>
           </Grid>
           <Grid item>
             <FormControlLabel
@@ -94,9 +88,7 @@ function FilterAutoAntiboy(props) {
         {/* mIAA Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
           <Grid item>
-            <Typography gutterBottom>
-              <h5>mIAA</h5>
-            </Typography>
+            <h5>mIAA</h5>
           </Grid>
           <Grid item>
             <FormControlLabel
@@ -128,9 +120,7 @@ function FilterAutoAntiboy(props) {
         {/* ZnT8A Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
           <Grid item>
-            <Typography gutterBottom>
-              <h5>ZnT8A</h5>
-            </Typography>
+            <h5>ZnT8A</h5>
           </Grid>
           <Grid item>
             <FormControlLabel

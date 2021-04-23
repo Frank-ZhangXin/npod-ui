@@ -2,7 +2,6 @@ import React, { setState } from "react";
 import Select from "react-select";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
-import makeAnimated from "react-select/animated";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles({
@@ -33,8 +32,6 @@ const options = [
   { value: "Multiracial", label: "Multiracial" },
 ];
 
-const animatedComponents = makeAnimated();
-
 function FilterRace(props) {
   const classes = useStyles();
 
@@ -49,10 +46,8 @@ function FilterRace(props) {
           options={options}
           isMulti
           closeMenuOnSelect={false}
-          components={animatedComponents}
         />
       </Box>
-      {console.log(props.selectedRace.map((opt) => opt.value))}
     </div>
   );
 }

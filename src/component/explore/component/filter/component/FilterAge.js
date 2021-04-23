@@ -42,9 +42,7 @@ function FilterAge(props) {
 
   return (
     <div>
-      <Typography id="age-range-slider" gutterBottom>
-        <h4>Age Range</h4>
-      </Typography>
+      <h4>Age Range</h4>
 
       <Slider
         className={classes.slider}
@@ -61,7 +59,7 @@ function FilterAge(props) {
             className={classes.textfield}
             id="min-age-input"
             label="Start"
-            defaultValue={props.ageMin}
+            // defaultValue={props.ageMin}
             value={props.ageMin}
             margin="dense"
             onChange={handleMinAgeInputChange}
@@ -78,7 +76,7 @@ function FilterAge(props) {
             className={classes.textfield}
             id="min-age-input"
             label="To"
-            defaultValue={props.ageMax}
+            // defaultValue={props.ageMax}
             value={props.ageMax}
             margin="dense"
             onChange={handleMaxAgeInputChange}

@@ -44,9 +44,7 @@ function FilterHbA1c(props) {
 
   return (
     <div>
-      <Typography id="age-range-slider" gutterBottom>
-        <h4>Hb1A1c % Range</h4>
-      </Typography>
+      <h4>Hb1A1c % Range</h4>
 
       <Slider
         className={classes.slider}
@@ -64,7 +62,7 @@ function FilterHbA1c(props) {
             className={classes.textfield}
             id="min-h-input"
             label="Start"
-            defaultValue={props.hMin}
+            // defaultValue={props.hMin}
             value={props.hMin}
             margin="dense"
             onChange={handleMinHInputChange}
@@ -81,7 +79,7 @@ function FilterHbA1c(props) {
             className={classes.textfield}
             id="min-h-input"
             label="To"
-            defaultValue={props.hMax}
+            // defaultValue={props.hMax}
             value={props.hMax}
             margin="dense"
             onChange={handleMaxHInputChange}

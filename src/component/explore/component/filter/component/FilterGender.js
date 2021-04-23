@@ -19,9 +19,7 @@ function FilterGender(props) {
 
   return (
     <div>
-      <Typography id="gender" gutterBottom>
-        <h4>Gender</h4>
-      </Typography>
+      <h4>Gender</h4>
       <FormGroup row className={classes.formGroup}>
         <Box mx={2}>
           <FormControlLabel

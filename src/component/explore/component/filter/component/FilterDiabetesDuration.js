@@ -42,9 +42,7 @@ function FilterDiabetesDuration(props) {
 
   return (
     <div>
-      <Typography id="dd-range-slider" gutterBottom>
-        <h4>Diabetes Duration</h4>
-      </Typography>
+      <h4>Diabetes Duration</h4>
 
       <Slider
         className={classes.slider}
@@ -61,7 +59,7 @@ function FilterDiabetesDuration(props) {
             className={classes.textfield}
             id="min-dd-input"
             label="Start"
-            defaultValue={props.DDMin}
+            // defaultValue={props.DDMin}
             value={props.DDMin}
             margin="dense"
             onChange={handleMinDDInputChange}
@@ -79,7 +77,7 @@ function FilterDiabetesDuration(props) {
             className={classes.textfield}
             id="min-dd-input"
             label="To"
-            defaultValue={props.DDMax}
+            // defaultValue={props.DDMax}
             value={props.DDMax}
             margin="dense"
             onChange={handleMaxDDInputChange}
