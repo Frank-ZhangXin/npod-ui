@@ -1,14 +1,12 @@
 import React, { setState } from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import testData from "../../../../data/test_case_data_0407.json";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import { connect } from "react-redux";
 import Search from "./component/Search";
 import FetchRawData from "./component/FetchRawData";
+import CaseView from "./../../../caseView/CaseView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +30,15 @@ const useStyles = makeStyles((theme) => ({
 
 function Result(props) {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  const handleSetDialogue = (value) => {
+    setOpen(value);
+  };
+
   return (
     <div>
-      <FetchRawData />
+      {/* <FetchRawData /> */}
       <Typography variant="h3">SEARCH REASULT</Typography>
       <div style={{ width: "100%" }}>
         <Box display="flex" justifyContent="flex-end">
@@ -50,7 +54,9 @@ function Result(props) {
         </Box>
       </div>
       {/* Show search result */}
-      <Search />
+      <Search setDialogue={handleSetDialogue} />
+      {console.log(open)}
+      <CaseView open={open} setDialogue={handleSetDialogue} />
     </div>
   );
 }
