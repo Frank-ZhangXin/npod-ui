@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import * as FileSaver from "file-saver";
-import * as XLSX from "xlsx";
+import FileSaver from "file-saver";
+import XLSX from "xlsx";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
