@@ -10,17 +10,19 @@ import FilterHbA1c from "./component/FilterHbA1c";
 import FilterAutoAntibody from "./component/FilterAutoAntibody";
 import FilterAutoAntibodyPositiveNumber from "./component/FilterAutoAntibodyPositiveNumber";
 import FilterInsulitis from "./component/FilterInsulitis";
+import FilterCPeptide from "./component/FilterCPeptide";
 
 export default function Filter() {
   return (
     <div>
       <Typography variant="h3">FILTER</Typography>
+      <FilterDonorType />
+      <FilterDiabetesDuration />
       <FilterAge />
       <FilterGender />
       <FilterRace />
       <FilterBMI />
-      <FilterDonorType />
-      <FilterDiabetesDuration />
+      <FilterCPeptide />
       <FilterHbA1c />
       <FilterAutoAntibody />
       <FilterAutoAntibodyPositiveNumber />

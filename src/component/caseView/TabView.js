@@ -68,10 +68,15 @@ export default function DisabledTabs() {
           indicatorColor="primary"
           className={classes.tabs}
         >
-          <Tab label="DONNOR SUMMARY" {...a11yProps(0)} />
-          <Tab label="TISSUE QUALITY" {...a11yProps(1)} />
+          <Tab label="DONOR SUMMARY" {...a11yProps(0)} />
+          <Tab label="CLINIC HISTORY" />
+          <Tab
+            label="Case Processing &amp; Tissue Quality QUALITY"
+            {...a11yProps(1)}
+          />
           <Tab label="FUNCTIONAL ASSAY" {...a11yProps(2)} />
-          <Tab label="HISTOLOGY" {...a11yProps(3)} />
+          <Tab label="HISTOPATHOLOGY" {...a11yProps(3)} />
+          <Tab label="IMMUNOPHENOTYPING" />
         </Tabs>
         <TabPanel value={value} index={0}>
           <VerticalView1 />

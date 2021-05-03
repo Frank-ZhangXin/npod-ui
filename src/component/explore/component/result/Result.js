@@ -38,21 +38,9 @@ function Result(props) {
 
   return (
     <div>
+      {/* Fetch raw data */}
       {/* <FetchRawData /> */}
       <Typography variant="h3">SEARCH REASULT</Typography>
-      <div style={{ width: "100%" }}>
-        <Box display="flex" justifyContent="flex-end">
-          <Box>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Download All
-            </Button>
-          </Box>
-        </Box>
-      </div>
       {/* Show search result */}
       <Search setDialogue={handleSetDialogue} />
       {console.log(open)}

@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import testData from "../../../../../data/test_case_data_0407.json";
+import ExportSpreadsheet from "./ExportSpreadSheet";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -81,6 +82,16 @@ function Search(props) {
   return (
     <div>
       <div style={{ width: "100%" }}>
+        <Box display="flex" justifyContent="flex-end">
+          <Box>
+            <ExportSpreadsheet
+              csvData={filteredData}
+              fileName="exportedSheet"
+            />
+          </Box>
+        </Box>
+      </div>
+      <div style={{ width: "100%" }}>
         <Box display="flex" justifyContent="flex-start">
           <Box mb={2}>
             <Typography variant="h5">
@@ -155,6 +166,10 @@ const mapStateToProps = (state) => {
 
     // Race
     selectedRace: state.selectedRace,
+
+    // C-Peptide
+    cPeptidePositive: state.cPeptidePositive,
+    cPeptideNegative: state.cPeptideNegative,
 
     // Raw Data
     rawData: state.rawData,

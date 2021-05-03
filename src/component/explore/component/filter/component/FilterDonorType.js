@@ -16,35 +16,39 @@ const useStyles = makeStyles({
 });
 
 const options = [
-  { value: "Autoantibody Positive", label: "Autoantibody Positive" },
-  {
-    value: "Cystic Fibrosis",
-    label: "Cystic Fibrosis",
-  },
-  { value: "Ketosis-Prone Diabetes", label: "Ketosis-Prone Diabetes" },
-  { value: "Fulminant Type 1 Diabetes", label: "Fulminant Type 1 Diabetes" },
-  {
-    value: "Gastric Bypass; Gestational Diabetes",
-    label: "Gastric Bypass; Gestational Diabetes",
-  },
-  {
-    value: "Monogenic Diabetes",
-    label: "Monogenic Diabetes",
-  },
   { value: "No Diabetes", label: "No Diabetes" },
-  { value: "Other – Diabetes", label: "Other – Diabetes" },
-  { value: "Other – No Diabetes", label: "Other – No Diabetes" },
-  { value: "Pending", label: "Pending" },
-  { value: "Pregnancy", label: "Pregnancy" },
   { value: "Type 1 Diabetes", label: "Type 1 Diabetes" },
+  { value: "Autoantibody Positive", label: "Autoantibody Positive" },
+  { value: "Type 2 Diabetes", label: "Type 2 Diabetes" },
+  { value: "Other – No Diabetes", label: "Other – No Diabetes" },
+  { value: "Other – Diabetes", label: "Other – Diabetes" },
   {
     value: "Type 1 Diabetes Joslin Medalist",
     label: "Type 1 Diabetes Joslin Medalist",
   },
   {
-    value: "Type 2 Diabetes; Transplant",
-    label: "Type 2 Diabetes; Transplant",
+    value: "Transplant",
+    label: "Transplant",
   },
+  {
+    value: "Cystic Fibrosis",
+    label: "Cystic Fibrosis",
+  },
+  {
+    value: "Monogenic Diabetes",
+    label: "Monogenic Diabetes",
+  },
+  {
+    value: "Gestational Diabetes",
+    label: "Gestational Diabetes",
+  },
+  { value: "Pregnancy", label: "Pregnancy" },
+  {
+    value: "Gastric Bypass",
+    label: "Gastric Bypass",
+  },
+  { value: "Ketosis-Prone Diabetes", label: "Ketosis-Prone Diabetes" },
+  { value: "Pending", label: "Pending" },
 ];
 
 function FilterDonorType(props) {

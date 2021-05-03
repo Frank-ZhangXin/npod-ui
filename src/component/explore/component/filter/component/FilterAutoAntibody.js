@@ -39,7 +39,7 @@ function FilterAutoAntiboy(props) {
               label="+"
             />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <FormControlLabel
               control={
                 <Checkbox
@@ -51,7 +51,7 @@ function FilterAutoAntiboy(props) {
               }
               label="-"
             />
-          </Grid>
+          </Grid> */}
         </Grid>
         {/* IA2A Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
@@ -71,7 +71,7 @@ function FilterAutoAntiboy(props) {
               label="+"
             />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <FormControlLabel
               control={
                 <Checkbox
@@ -83,7 +83,7 @@ function FilterAutoAntiboy(props) {
               }
               label="-"
             />
-          </Grid>
+          </Grid> */}
         </Grid>
         {/* mIAA Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
@@ -103,7 +103,7 @@ function FilterAutoAntiboy(props) {
               label="+"
             />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <FormControlLabel
               control={
                 <Checkbox
@@ -115,7 +115,7 @@ function FilterAutoAntiboy(props) {
               }
               label="-"
             />
-          </Grid>
+          </Grid> */}
         </Grid>
         {/* ZnT8A Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
@@ -135,7 +135,7 @@ function FilterAutoAntiboy(props) {
               label="+"
             />
           </Grid>
-          <Grid item>
+          {/* <Grid item>
             <FormControlLabel
               control={
                 <Checkbox
@@ -147,7 +147,7 @@ function FilterAutoAntiboy(props) {
               }
               label="-"
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </FormGroup>
     </div>

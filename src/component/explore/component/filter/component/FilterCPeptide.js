@@ -14,39 +14,41 @@ const useStyles = makeStyles({
   },
 });
 
-function FilterGender(props) {
+function FilterCPeptide(props) {
   const classes = useStyles();
 
   return (
     <div>
-      <h4>Sex</h4>
+      <h4>C-Peptide Detectable</h4>
       <FormGroup row className={classes.formGroup}>
         <Box mx={2}>
           <FormControlLabel
             control={
               <Checkbox
-                checked={props.maleChecked}
-                onChange={(event) => props.setMaleChecked(event.target.checked)}
-                name="maleChecked"
+                checked={props.cPeptidePositive}
+                onChange={(event) =>
+                  props.setCPeptidePositiveChecked(event.target.checked)
+                }
+                name="cPeptidePositive"
                 color="primary"
               />
             }
-            label="Male"
+            label="+"
           />
         </Box>
         <Box mx={2}>
           <FormControlLabel
             control={
               <Checkbox
-                checked={props.femaleChecked}
+                checked={props.cPeptideNegative}
                 onChange={(event) =>
-                  props.setFemaleChecked(event.target.checked)
+                  props.setCPeptideNegativeChecked(event.target.checked)
                 }
-                name="femaleChecked"
+                name="cPeptideNegative"
                 color="secondary"
               />
             }
-            label="Female"
+            label="-"
           />
         </Box>
       </FormGroup>
@@ -57,19 +59,19 @@ function FilterGender(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
-    maleChecked: state.maleChecked,
-    femaledChecked: state.femaleChecked,
+    cPeptidePositive: state.cPeptidePositive,
+    cPeptideNegative: state.cPeptideNegative,
   };
 };
 
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
-    setMaleChecked: (checked) =>
-      dispatch({ type: "SET_MALE_CHECKED", value: checked }),
-    setFemaleChecked: (checked) =>
-      dispatch({ type: "SET_FEMALE_CHECKED", value: checked }),
+    setCPeptidePositiveChecked: (checked) =>
+      dispatch({ type: "SET_CPEPTIDE_POSITIVE", value: checked }),
+    setCPeptideNegativeChecked: (checked) =>
+      dispatch({ type: "SET_CPEPTIDE_NEGATIVE", value: checked }),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterGender);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterCPeptide);
