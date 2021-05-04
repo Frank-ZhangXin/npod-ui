@@ -37,7 +37,7 @@ function FilterRace(props) {
 
   return (
     <div>
-      <h4>Race</h4>
+      <h4>Race/Ethnicity</h4>
       <Box className={classes.box}>
         <Select
           className={classes.multiSelect}

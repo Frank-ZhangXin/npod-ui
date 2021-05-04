@@ -50,6 +50,10 @@ const initialState = {
   // Race (object array)
   selectedRace: [],
 
+  // C-Peptide
+  cPeptidePositive: true,
+  cPeptideNegative: false,
+
   // Raw Data
   rawData: [],
 
@@ -250,6 +254,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         selectedRace: action.value,
+      };
+
+    // C-Peptide
+    case "SET_CPEPTIDE_POSITIVE":
+      return {
+        ...state,
+        cPeptidePositive: action.value,
+      };
+
+    case "SET_CPEPTIDE_NEGATIVE":
+      return {
+        ...state,
+        cPeptideNegative: action.value,
       };
 
     // Raw Data

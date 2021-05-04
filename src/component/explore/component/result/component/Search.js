@@ -5,6 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
+import testData from "../../../../../data/test_case_data_0407.json";
+import ExportSpreadsheet from "./ExportSpreadSheet";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,7 +23,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Search(props) {
   const classes = useStyles();
-  const filteredData = props.rawData
+  // const filteredData = props.rawData
+
+  const handleOpen = () => {
+    props.setDialogue(true);
+  };
+
+  const filteredData = testData
     // Age
     .filter(
       (donor) =>
@@ -74,6 +82,16 @@ function Search(props) {
   return (
     <div>
       <div style={{ width: "100%" }}>
+        <Box display="flex" justifyContent="flex-end">
+          <Box>
+            <ExportSpreadsheet
+              csvData={filteredData}
+              fileName="exportedSheet"
+            />
+          </Box>
+        </Box>
+      </div>
+      <div style={{ width: "100%" }}>
         <Box display="flex" justifyContent="flex-start">
           <Box mb={2}>
             <Typography variant="h5">
@@ -85,7 +103,7 @@ function Search(props) {
       <Grid container spacing={2}>
         {filteredData.map((donorCase, index) => (
           <Grid item xs={12} sm={4} md={3} lg={2} key={index}>
-            <Paper elevation={3} className={classes.paper}>
+            <Paper elevation={3} onClick={handleOpen} className={classes.paper}>
               <Typography variant="h5">{donorCase.case_id}</Typography>
             </Paper>
           </Grid>
@@ -148,6 +166,10 @@ const mapStateToProps = (state) => {
 
     // Race
     selectedRace: state.selectedRace,
+
+    // C-Peptide
+    cPeptidePositive: state.cPeptidePositive,
+    cPeptideNegative: state.cPeptideNegative,
 
     // Raw Data
     rawData: state.rawData,
