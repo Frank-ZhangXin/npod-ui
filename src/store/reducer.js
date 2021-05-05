@@ -44,8 +44,8 @@ const initialState = {
   hMax: 20.0,
 
   // Insulitis
-  insulitisPositiveChecked: true,
-  insulitisNegativeChecked: false,
+  insulitisPositiveChecked: false,
+  insulitisNegativeChecked: true,
 
   // Race (object array)
   selectedRace: [],

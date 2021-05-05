@@ -5,7 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import testData from "../../../../../data/test_case_data_0407.json";
+import testData from "../../../../../data/test_case_data_0504.json";
+import donor_types from "../../../../../data/donor_types.json";
 import ExportSpreadsheet from "./ExportSpreadSheet";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,13 +24,30 @@ const useStyles = makeStyles((theme) => ({
 
 function Search(props) {
   const classes = useStyles();
-  // const filteredData = props.rawData
 
   const handleOpen = () => {
     props.setDialogue(true);
   };
 
   const filteredData = testData
+    // Donor type
+    .filter((donor) => {
+      if (donor.donor_type_id !== null && props.selectedDonorType.length > 0) {
+        const typeArray = donor_types.filter(
+          (d) => d.donor_type_id === donor.donor_type_id
+        );
+        const typeName = typeArray.length !== 0 ? typeArray[0].name : "";
+        if (
+          props.selectedDonorType.map((obj) => obj.value).indexOf(typeName) > -1
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      return true;
+    })
     // Age
     .filter(
       (donor) =>
@@ -64,6 +82,13 @@ function Search(props) {
         donor.BMI >= props.bmiMin &&
         donor.BMI <= props.bmiMax
     )
+    // C-Peptide
+    .filter(
+      (donor) =>
+        donor.C_peptide !== null &&
+        ((donor.C_peptide === 0.001 && props.cPeptideNegative === true) ||
+          (donor.C_peptide !== 0.001 && props.cPeptidePositive === true))
+    )
     // Duration of Diabetes
     .filter(
       (donor) =>
@@ -77,6 +102,16 @@ function Search(props) {
         donor.HbA1c !== null &&
         donor.HbA1c >= props.hMin &&
         donor.HbA1c <= props.hMax
+    )
+    // Insulitis
+    .filter(
+      (donor) =>
+        (props.insulitisPositiveChecked === true &&
+          donor.histopathology !== null &&
+          donor.histopathology.indexOf("Insulitis") !== -1) ||
+        (props.insulitisNegativeChecked === true &&
+          (donor.histopathology === null ||
+            donor.histopathology.indexOf("Insulitis") === -1))
     );
   console.log(filteredData);
   return (

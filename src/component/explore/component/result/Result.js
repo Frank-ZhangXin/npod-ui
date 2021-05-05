@@ -43,7 +43,6 @@ function Result(props) {
       <Typography variant="h3">SEARCH REASULT</Typography>
       {/* Show search result */}
       <Search setDialogue={handleSetDialogue} />
-      {console.log(open)}
       <CaseView open={open} setDialogue={handleSetDialogue} />
     </div>
   );
