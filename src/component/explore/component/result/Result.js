@@ -40,7 +40,6 @@ function Result(props) {
     <div>
       {/* Fetch raw data */}
       {/* <FetchRawData /> */}
-      <Typography variant="h3">SEARCH REASULT</Typography>
       {/* Show search result */}
       <Search setDialogue={handleSetDialogue} />
       <CaseView open={open} setDialogue={handleSetDialogue} />

@@ -4,16 +4,21 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   slider: {
     width: "75%",
   },
   textfield: {
     width: 45,
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterBMI(props) {
   const classes = useStyles();
@@ -46,7 +51,21 @@ function FilterBMI(props) {
 
   return (
     <div>
-      <h4>BMI Range</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">BMI Range</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.bmiEnable}
+            onChange={(e) => props.setBmiEnable(e.target.checked)}
+            name="bmiEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
 
       <Slider
         className={classes.slider}
@@ -57,6 +76,7 @@ function FilterBMI(props) {
         max={60.0}
         step={0.1}
         aria-labelledby="bmi-range-slider"
+        disabled={!props.bmiEnable}
       />
       <Grid container spacing={10} alignItems="center" justify="space-around">
         <Grid item xs={4}>
@@ -64,7 +84,7 @@ function FilterBMI(props) {
             className={classes.textfield}
             id="min-age-input"
             label="Start"
-            // defaultValue={props.bmiMin}
+            disabled={!props.bmiEnable}
             value={props.bmiMin}
             margin="dense"
             onChange={handleMinBmiInputChange}
@@ -81,7 +101,7 @@ function FilterBMI(props) {
             className={classes.textfield}
             id="min-age-input"
             label="To"
-            // defaultValue={props.bmiMax}
+            disabled={!props.bmiEnable}
             value={props.bmiMax}
             margin="dense"
             onChange={handleMaxBmiInputChange}
@@ -101,6 +121,7 @@ function FilterBMI(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    bmiEnable: state.bmiEnable,
     bmiRange: state.bmiRange,
     bmiMin: state.bmiMin,
     bmiMax: state.bmiMax,
@@ -110,6 +131,8 @@ const mapStateToProps = (state) => {
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setBmiEnable: (newBmiEnable) =>
+      dispatch({ type: "SET_BMI_ENABLE", value: newBmiEnable }),
     setBmiRange: (newRange) =>
       dispatch({ type: "SET_BMI_RANGE", value: newRange }),
     setBmiMin: (newBmiMin) =>

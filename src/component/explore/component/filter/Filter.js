@@ -11,11 +11,12 @@ import FilterAutoAntibody from "./component/FilterAutoAntibody";
 import FilterAutoAntibodyPositiveNumber from "./component/FilterAutoAntibodyPositiveNumber";
 import FilterInsulitis from "./component/FilterInsulitis";
 import FilterCPeptide from "./component/FilterCPeptide";
+import FilterTitle from "./component/FilterTitle";
 
 export default function Filter() {
   return (
     <div>
-      <Typography variant="h3">FILTER</Typography>
+      <FilterTitle />
       <FilterDonorType />
       <FilterDiabetesDuration />
       <FilterAge />

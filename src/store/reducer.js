@@ -17,11 +17,12 @@ const initialState = {
   // Autoanibody positive number
   zeroChecked: true,
   oneChecked: true,
-  twoChecked: false,
-  threeChecked: false,
-  fourChecked: false,
+  twoChecked: true,
+  threeChecked: true,
+  fourChecked: true,
 
   // BMI
+  bmiEnable: false,
   bmiRange: [5.0, 60.0],
   bmiMin: 5.0,
   bmiMax: 60.0,
@@ -36,7 +37,7 @@ const initialState = {
 
   // Gender
   maleChecked: true,
-  femaleChecked: false,
+  femaleChecked: true,
 
   // HbA1c
   hRange: [2.0, 20.0],
@@ -44,7 +45,7 @@ const initialState = {
   hMax: 20.0,
 
   // Insulitis
-  insulitisPositiveChecked: false,
+  insulitisPositiveChecked: true,
   insulitisNegativeChecked: true,
 
   // Race (object array)
@@ -52,7 +53,7 @@ const initialState = {
 
   // C-Peptide
   cPeptidePositive: true,
-  cPeptideNegative: false,
+  cPeptideNegative: true,
 
   // Raw Data
   rawData: [],
@@ -63,6 +64,11 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    // Reset all state
+    case "SET_RESET":
+      console.log("reset triggered.");
+      return initialState;
+
     // Age
     case "SET_AGE_RANGE":
       return {
@@ -154,6 +160,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // BMI
+    case "SET_BMI_ENABLE":
+      return {
+        ...state,
+        bmiEnable: action.value,
+      };
     case "SET_BMI_RANGE":
       return {
         ...state,

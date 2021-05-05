@@ -19,7 +19,7 @@ export default function Explore() {
     <div>
       <Typography variant="h1">CASE EXPLORE</Typography>
       <Grid container spacing={2} justify={"center"} alignItems={"stretch"}>
-        <Grid item xs={12} md={4} lg={2}>
+        <Grid item xs={12} md={4} lg={3} xl={2}>
           <Paper
             elevation={3}
             style={{
@@ -29,7 +29,7 @@ export default function Explore() {
             <Filter />
           </Paper>
         </Grid>
-        <Grid item xs={12} md={7} lg={7}>
+        <Grid item xs={12} md={7} lg={7} xl={7}>
           <Paper
             elevation={3}
             style={{

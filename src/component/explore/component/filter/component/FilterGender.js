@@ -16,7 +16,6 @@ const useStyles = makeStyles({
 
 function FilterGender(props) {
   const classes = useStyles();
-
   return (
     <div>
       <h4>Sex</h4>
@@ -58,7 +57,7 @@ function FilterGender(props) {
 const mapStateToProps = (state) => {
   return {
     maleChecked: state.maleChecked,
-    femaledChecked: state.femaleChecked,
+    femaleChecked: state.femaleChecked,
   };
 };
 

@@ -117,7 +117,10 @@ function Search(props) {
   return (
     <div>
       <div style={{ width: "100%" }}>
-        <Box display="flex" justifyContent="flex-end">
+        <Box display="flex" justifyContent="space-between">
+          <Box>
+            <Typography variant="h4">SEARCH RESULT</Typography>
+          </Box>
           <Box>
             <ExportSpreadsheet
               csvData={filteredData}
@@ -129,7 +132,7 @@ function Search(props) {
       <div style={{ width: "100%" }}>
         <Box display="flex" justifyContent="flex-start">
           <Box mb={2}>
-            <Typography variant="h5">
+            <Typography variant="h6" color="secondary">
               Totally {filteredData.length} cases are showing
             </Typography>
           </Box>
