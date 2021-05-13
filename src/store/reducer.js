@@ -1,10 +1,12 @@
 const initialState = {
   // Age
+  ageEnable: false,
   ageRange: [0, 95],
   ageMin: 0,
   ageMax: 95,
 
   // Autoantibody
+  aaEnable: false,
   gadaP: true,
   gadaN: false,
   ia2aP: true,
@@ -15,6 +17,7 @@ const initialState = {
   znt8aN: false,
 
   // Autoanibody positive number
+  aaPositive: false,
   zeroChecked: true,
   oneChecked: true,
   twoChecked: true,
@@ -28,6 +31,7 @@ const initialState = {
   bmiMax: 60.0,
 
   // Diabetes Duration (DD)
+  DDEnable: false,
   DDRange: [0, 85],
   DDMin: 0,
   DDMax: 85,
@@ -36,15 +40,18 @@ const initialState = {
   selectedDonorType: [],
 
   // Gender
+  genderEnable: false,
   maleChecked: true,
   femaleChecked: true,
 
   // HbA1c
+  hEnable: false,
   hRange: [2.0, 20.0],
   hMin: 2.0,
   hMax: 20.0,
 
   // Insulitis
+  insulitisEnable: false,
   insulitisPositiveChecked: true,
   insulitisNegativeChecked: true,
 
@@ -52,6 +59,7 @@ const initialState = {
   selectedRace: [],
 
   // C-Peptide
+  cPeptideEnable: false,
   cPeptidePositive: true,
   cPeptideNegative: true,
 
@@ -60,6 +68,9 @@ const initialState = {
 
   // Filtered Data
   filteredData: [],
+
+  // Single case data
+  currentCase: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,9 +78,17 @@ const reducer = (state = initialState, action) => {
     // Reset all state
     case "SET_RESET":
       console.log("reset triggered.");
-      return initialState;
+      return {
+        ...initialState,
+        rawData: state.rawData,
+      };
 
     // Age
+    case "SET_AGE_ENABLE":
+      return {
+        ...state,
+        ageEnable: action.value,
+      };
     case "SET_AGE_RANGE":
       return {
         ...state,
@@ -91,6 +110,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // Autoantibody
+    case "SET_AA_ENABLE":
+      return {
+        ...state,
+        aaEnable: action.value,
+      };
     case "SET_GADAP":
       return {
         ...state,
@@ -133,6 +157,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // Autoantibody Positive number
+    case "SET_AA_POSITIVE_ENABLE":
+      return {
+        ...state,
+        aaPositiveEnable: action.value,
+      };
     case "SET_ZERO_CHECKED":
       return {
         ...state,
@@ -186,6 +215,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // Diabetes Duration
+    case "SET_DD_ENABLE":
+      return {
+        ...state,
+        DDEnable: action.value,
+      };
     case "SET_DD_RANGE":
       return {
         ...state,
@@ -214,12 +248,16 @@ const reducer = (state = initialState, action) => {
       };
 
     // Gender
+    case "SET_GENDER_ENABLE":
+      return {
+        ...state,
+        genderEnable: action.value,
+      };
     case "SET_MALE_CHECKED":
       return {
         ...state,
         maleChecked: action.value,
       };
-
     case "SET_FEMALE_CHECKED":
       return {
         ...state,
@@ -227,6 +265,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // HbA1c
+    case "SET_H_ENABLE":
+      return {
+        ...state,
+        hEnable: action.value,
+      };
     case "SET_H_RANGE":
       return {
         ...state,
@@ -248,6 +291,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // Insulitis
+    case "SET_INSULITIS_ENABLE":
+      return {
+        ...state,
+        insulitisEnable: action.value,
+      };
     case "SET_INSULITIS_POSITIVE_CHECKED":
       return {
         ...state,
@@ -268,6 +316,11 @@ const reducer = (state = initialState, action) => {
       };
 
     // C-Peptide
+    case "SET_CPEPTIDE_ENABLE":
+      return {
+        ...state,
+        cPeptideEnable: action.value,
+      };
     case "SET_CPEPTIDE_POSITIVE":
       return {
         ...state,
@@ -292,6 +345,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredData: action.value,
+      };
+
+    case "SET_CURRENT_CASE":
+      return {
+        ...state,
+        currentCase: action.value,
       };
 
     default:

@@ -4,16 +4,21 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   slider: {
     width: "75%",
   },
   textfield: {
     width: 45,
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterDiabetesDuration(props) {
   const classes = useStyles();
@@ -42,7 +47,21 @@ function FilterDiabetesDuration(props) {
 
   return (
     <div>
-      <h4>Diabetes Duration</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Diabetes Duration</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.DDEnable}
+            onChange={(e) => props.setDDEnable(e.target.checked)}
+            name="DDEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
 
       <Slider
         className={classes.slider}
@@ -52,6 +71,7 @@ function FilterDiabetesDuration(props) {
         min={0}
         max={85}
         aria-labelledby="dd-range-slider"
+        disabled={!props.DDEnable}
       />
       <Grid container spacing={10} alignItems="center" justify="space-around">
         <Grid item xs={4}>
@@ -59,7 +79,7 @@ function FilterDiabetesDuration(props) {
             className={classes.textfield}
             id="min-dd-input"
             label="Start"
-            // defaultValue={props.DDMin}
+            disabled={!props.DDEnable}
             value={props.DDMin}
             margin="dense"
             onChange={handleMinDDInputChange}
@@ -77,7 +97,7 @@ function FilterDiabetesDuration(props) {
             className={classes.textfield}
             id="min-dd-input"
             label="To"
-            // defaultValue={props.DDMax}
+            disabled={!props.DDEnable}
             value={props.DDMax}
             margin="dense"
             onChange={handleMaxDDInputChange}
@@ -98,6 +118,7 @@ function FilterDiabetesDuration(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    DDEnable: state.DDEnable,
     DDRange: state.DDRange,
     DDMin: state.DDMin,
     DDMax: state.DDMax,
@@ -107,6 +128,8 @@ const mapStateToProps = (state) => {
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setDDEnable: (newDDEnable) =>
+      dispatch({ type: "SET_DD_ENABLE", value: newDDEnable }),
     setDDRange: (newDDRange) =>
       dispatch({ type: "SET_DD_RANGE", value: newDDRange }),
     setDDMin: (newDDMin) => dispatch({ type: "SET_DD_MIN", value: newDDMin }),

@@ -4,18 +4,11 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import Switch from "@material-ui/core/Switch";
-
-import CaseViewTitle from "./CaseViewTitle";
-import TabView from "./TabView";
+import CaseViewTitle from "./component/CaseViewTitle";
+import TabView from "./component/TabView/TabView";
 import GetAppIcon from "@material-ui/icons/GetApp";
+import Typography from "@material-ui/core/Typography";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -34,45 +27,37 @@ const useStyles = makeStyles((theme) => ({
   dialogPaper: {
     height: "80vh",
   },
+  dialogContent: {
+    height: "50vh",
+  },
 }));
 
-export default function CaseView(props) {
+function CaseView(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [fullWidth, setFullWidth] = React.useState(true);
   const [maxWidth, setMaxWidth] = React.useState("xl");
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
     props.setDialogue(false);
   };
 
-  const handleMaxWidthChange = (event) => {
-    setMaxWidth(event.target.value);
-  };
-
-  const handleFullWidthChange = (event) => {
-    setFullWidth(event.target.checked);
-  };
-
   return (
     <div>
-      {/* <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Open Donnor Case
-      </Button> */}
       <Dialog
         fullWidth={fullWidth}
         maxWidth={maxWidth}
-        height="400px"
+        height="700px"
         open={props.open}
         onClose={handleClose}
         aria-labelledby="donnor-case-dialog-title"
         classes={{ paper: classes.dialogPaper }}
       >
-        <CaseViewTitle onClose={handleClose}>NPOD CASE ID: 33063</CaseViewTitle>
+        <CaseViewTitle onClose={handleClose}>
+          <Typography variant="h4">
+            NPOD CASE ID: {props.currentCase.case_id}
+          </Typography>
+        </CaseViewTitle>
 
         <DialogContent dividers>
           {/* <DialogContentText></DialogContentText> */}
@@ -88,3 +73,13 @@ export default function CaseView(props) {
     </div>
   );
 }
+
+// Subscribe
+const mapStateToProps = (state) => {
+  return {
+    // Filtered Data
+    currentCase: state.currentCase,
+  };
+};
+
+export default connect(mapStateToProps, null)(CaseView);

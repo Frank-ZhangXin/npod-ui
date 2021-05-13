@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import testData from "../../../../../data/test_case_data_0504.json";
+import testData from "../../../../../data/test_case_data_0513.json";
 import donor_types from "../../../../../data/donor_types.json";
 import ExportSpreadsheet from "./ExportSpreadSheet";
 
@@ -25,10 +25,12 @@ const useStyles = makeStyles((theme) => ({
 function Search(props) {
   const classes = useStyles();
 
-  const handleOpen = () => {
+  const handleOpen = (e, donorCase) => {
+    props.setCurrentCase(donorCase);
     props.setDialogue(true);
   };
 
+  // const filteredData = props.rawData
   const filteredData = testData
     // Donor type
     .filter((donor) => {
@@ -51,16 +53,20 @@ function Search(props) {
     // Age
     .filter(
       (donor) =>
-        donor.age_years !== null &&
-        donor.age_years >= props.ageMin &&
-        donor.age_years <= props.ageMax
+        (donor.age_years !== null &&
+          donor.age_years >= props.ageMin &&
+          donor.age_years <= props.ageMax) ||
+        props.ageEnable === false
     )
     // Gender
     .filter(
       (donor) =>
-        donor.sex !== null &&
-        ((donor.sex === "Female" && props.femaleChecked) ||
-          (donor.sex != null && donor.sex === "Male" && props.maleChecked))
+        (donor.sex !== null &&
+          ((donor.sex === "Female" && props.femaleChecked) ||
+            (donor.sex != null &&
+              donor.sex === "Male" &&
+              props.maleChecked))) ||
+        props.genderEnable === false
     )
     // Race
     .filter((donor) => {
@@ -78,30 +84,34 @@ function Search(props) {
     // BMI
     .filter(
       (donor) =>
-        donor.BMI !== null &&
-        donor.BMI >= props.bmiMin &&
-        donor.BMI <= props.bmiMax
+        (donor.BMI !== null &&
+          donor.BMI >= props.bmiMin &&
+          donor.BMI <= props.bmiMax) ||
+        props.bmiEnable === false
     )
     // C-Peptide
     .filter(
       (donor) =>
-        donor.C_peptide !== null &&
-        ((donor.C_peptide === 0.001 && props.cPeptideNegative === true) ||
-          (donor.C_peptide !== 0.001 && props.cPeptidePositive === true))
+        (donor.C_peptide !== null &&
+          ((donor.C_peptide === 0.001 && props.cPeptideNegative === true) ||
+            (donor.C_peptide !== 0.001 && props.cPeptidePositive === true))) ||
+        props.cPeptideEnable === false
     )
     // Duration of Diabetes
     .filter(
       (donor) =>
-        donor.diabetes_hx_years !== null &&
-        donor.diabetes_hx_years >= props.DDMin &&
-        donor.diabetes_hx_years <= props.DDMax
+        (donor.diabetes_hx_years !== null &&
+          donor.diabetes_hx_years >= props.DDMin &&
+          donor.diabetes_hx_years <= props.DDMax) ||
+        props.DDEnable === false
     )
     // Hb1A1c
     .filter(
       (donor) =>
-        donor.HbA1c !== null &&
-        donor.HbA1c >= props.hMin &&
-        donor.HbA1c <= props.hMax
+        (donor.HbA1c !== null &&
+          donor.HbA1c >= props.hMin &&
+          donor.HbA1c <= props.hMax) ||
+        props.hEnable === false
     )
     // Insulitis
     .filter(
@@ -111,7 +121,8 @@ function Search(props) {
           donor.histopathology.indexOf("Insulitis") !== -1) ||
         (props.insulitisNegativeChecked === true &&
           (donor.histopathology === null ||
-            donor.histopathology.indexOf("Insulitis") === -1))
+            donor.histopathology.indexOf("Insulitis") === -1)) ||
+        props.insulitisEnable === false
     );
   console.log(filteredData);
   return (
@@ -141,7 +152,11 @@ function Search(props) {
       <Grid container spacing={2}>
         {filteredData.map((donorCase, index) => (
           <Grid item xs={12} sm={4} md={3} lg={2} key={index}>
-            <Paper elevation={3} onClick={handleOpen} className={classes.paper}>
+            <Paper
+              elevation={3}
+              onClick={(e) => handleOpen(e, donorCase)}
+              className={classes.paper}
+            >
               <Typography variant="h5">{donorCase.case_id}</Typography>
             </Paper>
           </Grid>
@@ -155,11 +170,13 @@ function Search(props) {
 const mapStateToProps = (state) => {
   return {
     // Age
+    ageEnable: state.ageEnable,
     ageRange: state.ageRange,
     ageMin: state.ageMin,
     ageMax: state.ageMax,
 
     // Autoantibody type
+    aaEnable: state.aaEnable,
     gadaP: state.gadaP,
     gadaN: state.gadaN,
     ia2aP: state.ia2aP,
@@ -177,11 +194,13 @@ const mapStateToProps = (state) => {
     fourChecked: state.fourChecked,
 
     // BMI
+    bmiEnable: state.bmiEnable,
     bmiRange: state.bmiRange,
     bmiMin: state.bmiMin,
     bmiMax: state.bmiMax,
 
     // Diabetes Duration
+    DDEnable: state.DDEnable,
     DDRange: state.DDRange,
     DDMin: state.DDMin,
     DDMax: state.DDMax,
@@ -190,15 +209,18 @@ const mapStateToProps = (state) => {
     selectedDonorType: state.selectedDonorType,
 
     // Gender
+    genderEnable: state.genderEnable,
     maleChecked: state.maleChecked,
     femaleChecked: state.femaleChecked,
 
     // Hb1A1c
+    hEnable: state.hEnable,
     hRange: state.hRange,
     hMin: state.hMin,
     hMax: state.hMax,
 
     // Insulitis
+    insulitisEnable: state.insulitisEnable,
     insulitisPositiveChecked: state.insulitisPositiveChecked,
     insulitisNegativeChecked: state.insulitisNegativeChecked,
 
@@ -206,6 +228,7 @@ const mapStateToProps = (state) => {
     selectedRace: state.selectedRace,
 
     // C-Peptide
+    cPeptideEnable: state.cPeptideEnable,
     cPeptidePositive: state.cPeptidePositive,
     cPeptideNegative: state.cPeptideNegative,
 
@@ -224,6 +247,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_RAW_DATA", value: newRawData }),
     setFilteredData: (newFilteredData) =>
       dispatch({ type: "SET_FILTERED_DATA", value: newFilteredData }),
+    setCurrentCase: (newCase) =>
+      dispatch({ type: "SET_CURRENT_CASE", value: newCase }),
   };
 };
 
