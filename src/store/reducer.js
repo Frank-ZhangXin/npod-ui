@@ -71,6 +71,12 @@ const initialState = {
 
   // Single case data
   currentCase: [],
+
+  // Donor Types (map)
+  donorTypesMap: null,
+
+  // Cause of Death
+  causeOfDeathMap: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -351,6 +357,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentCase: action.value,
+      };
+
+    // Donor Types
+    case "SET_DONOR_TYPES_MAP":
+      return {
+        ...state,
+        donorTypesMap: action.value,
+      };
+
+    // Cause Of Death
+    case "SET_CAUSE_OF_DEATH_MAP":
+      return {
+        ...state,
+        causeOfDeathMap: action.value,
       };
 
     default:

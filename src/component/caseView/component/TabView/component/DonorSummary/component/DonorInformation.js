@@ -20,9 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function DataGridDemo(props) {
   const classes = useStyles();
-  const donorType = donor_types.filter(
-    (d) => d.donor_type_id === props.currentCase.donor_type_id
-  )[0].name;
+  const donorType = props.donorTypesMap[props.currentCase.donor_type_id];
 
   const columns = [
     { field: "name", headerName: "Name", width: 200 },
@@ -60,7 +58,7 @@ function DataGridDemo(props) {
           : props.currentCase.gestational_age_weeks,
     }, // need mockup
     { id: 5, name: "Sex", value: props.currentCase.sex },
-    { id: 6, name: "Race", value: props.currentCase.race },
+    { id: 6, name: "Race/Ethnicity", value: props.currentCase.race_ethnicity },
     {
       id: 7,
       name: "Height (cm)",
@@ -85,11 +83,11 @@ function DataGridDemo(props) {
     },
     {
       id: 10,
-      name: "Cause of Death ID",
+      name: "Cause of Death",
       value:
         props.currentCase.cause_of_death_id === null
           ? "Unavailable"
-          : props.currentCase.cause_of_death_id,
+          : props.causeOfDeathMap[props.currentCase.cause_of_death_id],
     }, // need mockup
     {
       id: 11,
@@ -120,6 +118,12 @@ const mapStateToProps = (state) => {
   return {
     // Filtered Data
     currentCase: state.currentCase,
+
+    // Donor Types (map)
+    donorTypesMap: state.donorTypesMap,
+
+    // Cause of Deaht map
+    causeOfDeathMap: state.causeOfDeathMap,
   };
 };
 

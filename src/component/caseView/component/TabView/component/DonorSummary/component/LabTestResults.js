@@ -59,25 +59,25 @@ function LabTestResults(props) {
       id: 6,
       name: "C-PEPTIDE (ng/mL)",
       value:
-        props.currentCase.C_peptide === null
+        props.currentCase.C_peptide_ng_mL === null
           ? "Unavailable"
-          : props.currentCase.C_peptide,
+          : props.currentCase.C_peptide_ng_mL,
     }, // need mockup
     {
       id: 7,
       name: "HbA1C Hospital (%)",
       value:
-        props.currentCase.HbA1c === null
+        props.currentCase.HbA1c_percent === null
           ? "Unavailable"
-          : props.currentCase.HbA1c,
+          : props.currentCase.HbA1c_percent,
     }, // need mockup
     {
       id: 8,
       name: "HbA1C Lab (%)",
       value:
-        props.currentCase.HbA1c === null
+        props.currentCase.HbA1c_percent === null
           ? "Unavailable"
-          : props.currentCase.HbA1c,
+          : props.currentCase.HbA1c_percent,
     }, // need mockup
     {
       id: 9,

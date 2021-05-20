@@ -30,15 +30,12 @@ function Search(props) {
     props.setDialogue(true);
   };
 
-  // const filteredData = props.rawData
-  const filteredData = testData
+  const filteredData = props.rawData
+    // const filteredData = testData
     // Donor type
     .filter((donor) => {
       if (donor.donor_type_id !== null && props.selectedDonorType.length > 0) {
-        const typeArray = donor_types.filter(
-          (d) => d.donor_type_id === donor.donor_type_id
-        );
-        const typeName = typeArray.length !== 0 ? typeArray[0].name : "";
+        const typeName = props.donorTypesMap[donor.donor_type_id];
         if (
           props.selectedDonorType.map((obj) => obj.value).indexOf(typeName) > -1
         ) {
@@ -47,7 +44,6 @@ function Search(props) {
           return false;
         }
       }
-
       return true;
     })
     // Age
@@ -70,9 +66,11 @@ function Search(props) {
     )
     // Race
     .filter((donor) => {
-      if (donor.race !== null && props.selectedRace.length > 0) {
+      if (donor.race_ethnicity !== null && props.selectedRace.length > 0) {
         if (
-          props.selectedRace.map((obj) => obj.value).indexOf(donor.race) > -1
+          props.selectedRace
+            .map((obj) => obj.value)
+            .indexOf(donor.race_ethnicity) > -1
         ) {
           return true;
         } else {
@@ -92,9 +90,11 @@ function Search(props) {
     // C-Peptide
     .filter(
       (donor) =>
-        (donor.C_peptide !== null &&
-          ((donor.C_peptide === 0.001 && props.cPeptideNegative === true) ||
-            (donor.C_peptide !== 0.001 && props.cPeptidePositive === true))) ||
+        (donor.C_peptide_ng_mL !== null &&
+          ((donor.C_peptide_ng_mL === "<0.05" &&
+            props.cPeptideNegative === true) ||
+            (donor.C_peptide_ng_mL !== "<0.05" &&
+              props.cPeptidePositive === true))) ||
         props.cPeptideEnable === false
     )
     // Duration of Diabetes
@@ -108,9 +108,9 @@ function Search(props) {
     // Hb1A1c
     .filter(
       (donor) =>
-        (donor.HbA1c !== null &&
-          donor.HbA1c >= props.hMin &&
-          donor.HbA1c <= props.hMax) ||
+        (donor.HbA1c_percent !== null &&
+          donor.HbA1c_percent >= props.hMin &&
+          donor.HbA1c_percent <= props.hMax) ||
         props.hEnable === false
     )
     // Insulitis
@@ -237,6 +237,9 @@ const mapStateToProps = (state) => {
 
     // Filtered Data
     filteredData: state.filteredData,
+
+    // Donor Types (map)
+    donorTypesMap: state.donorTypesMap,
   };
 };
 
