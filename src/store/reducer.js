@@ -1,12 +1,12 @@
 const initialState = {
   // Age
-  ageEnable: false,
+  ageEnable: true,
   ageRange: [0, 95],
   ageMin: 0,
   ageMax: 95,
 
   // Autoantibody
-  aaEnable: false,
+  aaEnable: true,
   gadaP: true,
   gadaN: false,
   ia2aP: true,
@@ -17,7 +17,7 @@ const initialState = {
   znt8aN: false,
 
   // Autoanibody positive number
-  aaPositive: false,
+  aaPositiveEnable: false,
   zeroChecked: true,
   oneChecked: true,
   twoChecked: true,
@@ -25,13 +25,13 @@ const initialState = {
   fourChecked: true,
 
   // BMI
-  bmiEnable: false,
+  bmiEnable: true,
   bmiRange: [5.0, 60.0],
   bmiMin: 5.0,
   bmiMax: 60.0,
 
   // Diabetes Duration (DD)
-  DDEnable: false,
+  DDEnable: true,
   DDRange: [0, 85],
   DDMin: 0,
   DDMax: 85,
@@ -40,18 +40,18 @@ const initialState = {
   selectedDonorType: [],
 
   // Gender
-  genderEnable: false,
+  genderEnable: true,
   maleChecked: true,
   femaleChecked: true,
 
   // HbA1c
-  hEnable: false,
+  hEnable: true,
   hRange: [2.0, 20.0],
   hMin: 2.0,
   hMax: 20.0,
 
   // Insulitis
-  insulitisEnable: false,
+  insulitisEnable: true,
   insulitisPositiveChecked: true,
   insulitisNegativeChecked: true,
 
@@ -59,7 +59,7 @@ const initialState = {
   selectedRace: [],
 
   // C-Peptide
-  cPeptideEnable: false,
+  cPeptideEnable: true,
   cPeptidePositive: true,
   cPeptideNegative: true,
 
@@ -72,11 +72,17 @@ const initialState = {
   // Single case data
   currentCase: [],
 
-  // Donor Types (map)
+  // Donor Types map
   donorTypesMap: null,
 
-  // Cause of Death
+  // Cause of Death map
   causeOfDeathMap: null,
+
+  // HLA
+  hla: null,
+
+  // HLA map
+  hlaMap: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -371,6 +377,20 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         causeOfDeathMap: action.value,
+      };
+
+    // HLA
+    case "SET_HLA":
+      return {
+        ...state,
+        hla: action.value,
+      };
+
+    // HLA map
+    case "SET_HLA_MAP":
+      return {
+        ...state,
+        hlaMap: action.value,
       };
 
     default:

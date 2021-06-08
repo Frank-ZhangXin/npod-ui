@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HLAInformation(props) {
+function Comments(props) {
   const classes = useStyles();
 
   const columns = [
@@ -93,4 +93,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(HLAInformation);
+export default connect(mapStateToProps, null)(Comments);

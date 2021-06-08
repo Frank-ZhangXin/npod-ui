@@ -47,16 +47,13 @@ function CaseView(props) {
       <Dialog
         fullWidth={fullWidth}
         maxWidth={maxWidth}
-        height="700px"
         open={props.open}
         onClose={handleClose}
         aria-labelledby="donnor-case-dialog-title"
         classes={{ paper: classes.dialogPaper }}
       >
         <CaseViewTitle onClose={handleClose}>
-          <Typography variant="h4">
-            NPOD CASE ID: {props.currentCase.case_id}
-          </Typography>
+          NPOD CASE ID: {props.currentCase.case_id}
         </CaseViewTitle>
 
         <DialogContent dividers>

@@ -28,9 +28,33 @@ function FetchRawData(props) {
       }
       props.setCauseOfDeathMap(cODMap);
     };
+    const fetchHLA = async () => {
+      const result = await axios.get("/fetch_HLA");
+      // hla
+      props.setHLA(result.data);
+      // HLAMap is dictionary, key is case_id, value is dictionary of all HLA value pairs.
+      const HLAMap = {};
+      for (
+        var i = 0, tempData, tempKey, tempMap = {};
+        i < result.data.length;
+        i++
+      ) {
+        tempData = result.data[i];
+        Object.keys(tempData).map((key) => {
+          if (key === "case_id") {
+            tempKey = tempData[key];
+          } else {
+            tempMap[key] = tempData[key];
+          }
+        });
+        HLAMap[tempKey] = JSON.parse(JSON.stringify(tempMap)); // Deep copy
+      }
+      props.setHLAMap(HLAMap);
+    };
     fetchCases();
     fetchDonorType();
     fetchCauseOfDeath();
+    fetchHLA();
   }, []);
 
   return <div></div>;
@@ -53,6 +77,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({ type: "SET_DONOR_TYPES_MAP", value: newDonorTypes }),
     setCauseOfDeathMap: (newCauseOfDeath) =>
       dispatch({ type: "SET_CAUSE_OF_DEATH_MAP", value: newCauseOfDeath }),
+    setHLA: (newHLA) => dispatch({ type: "SET_HLA", value: newHLA }),
+    setHLAMap: (newHLAMap) =>
+      dispatch({ type: "SET_HLA_MAP", value: newHLAMap }),
   };
 };
 

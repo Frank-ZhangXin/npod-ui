@@ -32,6 +32,7 @@ function Search(props) {
 
   const filteredData = props.rawData
     // const filteredData = testData
+    .filter((donor) => donor.is_public === 1)
     // Donor type
     .filter((donor) => {
       if (donor.donor_type_id !== null && props.selectedDonorType.length > 0) {
@@ -113,6 +114,29 @@ function Search(props) {
           donor.HbA1c_percent <= props.hMax) ||
         props.hEnable === false
     )
+    // AutoAntibody
+    .filter(
+      (donor) =>
+        (((props.gadaP === true && donor.GADA_Result === "Positive") ||
+          props.gadaP === false) &&
+          ((props.ia2aP === true && donor.IA_2A_Result === "Positive") ||
+            props.ia2aP === false) &&
+          ((props.miaaP === true && donor.mIAA_Result === "Positive") ||
+            props.ia2aP === false) &&
+          ((props.znt8aP === true && donor.ZnT8A_Result === "Positive") ||
+            props.znt8aP === false)) ||
+        props.aaEnable === false
+    )
+    // AutoAntibody number
+    .filter(
+      (donor) =>
+        (props.zeroChecked === true && donor.AABtally === 0) ||
+        (props.oneChecked === true && donor.AABtally === 1) ||
+        (props.twoChecked === true && donor.AABtally === 2) ||
+        (props.threeChecked === true && donor.AABtally === 3) ||
+        (props.fourChecked === true && donor.AABtally === 4) ||
+        props.aaPositiveEnable === false
+    )
     // Insulitis
     .filter(
       (donor) =>
@@ -135,7 +159,8 @@ function Search(props) {
           <Box>
             <ExportSpreadsheet
               csvData={filteredData}
-              fileName="exportedSheet"
+              fileName={"nPOD_downloaed_spreadsheet_" + Date().toLocaleString()}
+              donorTypesMap={props.donorTypesMap}
             />
           </Box>
         </Box>
@@ -187,6 +212,7 @@ const mapStateToProps = (state) => {
     znt8aN: state.znt8aN,
 
     // Antibody Positive
+    aaPositiveEnable: state.aaPositiveEnable,
     zeroChecked: state.zeroChecked,
     oneChecked: state.oneChecked,
     twoChecked: state.twoChecked,

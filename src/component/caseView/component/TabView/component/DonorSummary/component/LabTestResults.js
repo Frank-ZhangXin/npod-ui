@@ -29,31 +29,43 @@ function LabTestResults(props) {
   const rows = [
     {
       id: 1,
-      name: "Auto Antibody Status",
+      name: "AAB Positive Number",
       value:
-        props.currentCase.autoantibody_results === null
+        props.currentCase.AABtally === null
           ? "Unavailable"
-          : props.currentCase.autoantibody_results,
+          : props.currentCase.AABtally,
     }, // need mockup
     {
       id: 2,
       name: "GADA",
-      value: "Unavailable",
+      value:
+        props.currentCase.GADA_Result === null
+          ? "Unavailable"
+          : props.currentCase.GADA_Result,
     }, // need mockup
     {
       id: 3,
       name: "IA2A",
-      value: "Unavailable",
+      value:
+        props.currentCase.IA_2A_Result === null
+          ? "Unavailable"
+          : props.currentCase.IA_2A_Result,
     }, // need mockup
     {
       id: 4,
       name: "mIAA",
-      value: "Unavailable",
+      value:
+        props.currentCase.mIAA_Result === null
+          ? "Unavailable"
+          : props.currentCase.mIAA_Result,
     }, // need mockup
     {
       id: 5,
       name: "ZnT8A",
-      value: "Unavailable",
+      value:
+        props.currentCase.ZnT8A_Result === null
+          ? "Unavailable"
+          : props.currentCase.ZnT8A_Result,
     }, // need mockup
     {
       id: 6,
