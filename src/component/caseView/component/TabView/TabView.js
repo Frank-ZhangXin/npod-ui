@@ -5,10 +5,7 @@ import Tab from "@material-ui/core/Tab";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import VerticalView1 from "./VerticalView1";
-import VerticalView2 from "./VerticalView2";
-import VerticalView3 from "./VerticalView3";
-import VerticalView4 from "./VerticalView4";
+import DonorSummary from "./component/DonorSummary/DonorSummary";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   tabs: {
     borderBottom: `1px solid ${theme.palette.divider}`,
   },
+  tabPanel: {
+    height: "830px",
+  },
 }));
 
 function a11yProps(index) {
@@ -50,7 +50,7 @@ function a11yProps(index) {
   };
 }
 
-export default function DisabledTabs() {
+export default function TabView() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -69,27 +69,35 @@ export default function DisabledTabs() {
           className={classes.tabs}
         >
           <Tab label="DONOR SUMMARY" {...a11yProps(0)} />
-          <Tab label="CLINIC HISTORY" />
+          <Tab label="CLINIC HISTORY" {...a11yProps(1)} />
           <Tab
             label="Case Processing &amp; Tissue Quality QUALITY"
-            {...a11yProps(1)}
+            {...a11yProps(2)}
           />
-          <Tab label="FUNCTIONAL ASSAY" {...a11yProps(2)} />
-          <Tab label="HISTOPATHOLOGY" {...a11yProps(3)} />
-          <Tab label="IMMUNOPHENOTYPING" />
+          <Tab label="FUNCTIONAL ASSAY" {...a11yProps(3)} />
+          <Tab label="HISTOPATHOLOGY" {...a11yProps(4)} />
+          <Tab label="IMMUNOPHENOTYPING" {...a11yProps(5)} />
         </Tabs>
-        <TabPanel value={value} index={0}>
-          <VerticalView1 />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <VerticalView2 />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <VerticalView3 />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <VerticalView4 />
-        </TabPanel>
+        <div className={classes.tabPanel}>
+          <TabPanel value={value} index={0}>
+            <DonorSummary />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            placeholder
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            placeholder
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            placeholder
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            placeholder
+          </TabPanel>
+          <TabPanel value={value} index={5}>
+            placeholder
+          </TabPanel>
+        </div>
       </Paper>
     </div>
   );

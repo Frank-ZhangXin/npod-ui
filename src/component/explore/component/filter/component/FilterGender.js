@@ -5,21 +5,39 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   formGroup: {
     alignItems: "center",
     justifyContent: "center",
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterGender(props) {
   const classes = useStyles();
-
   return (
     <div>
-      <h4>Sex</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Sex</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.genderEnable}
+            onChange={(e) => props.setGenderEnable(e.target.checked)}
+            name="genderEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
+
       <FormGroup row className={classes.formGroup}>
         <Box mx={2}>
           <FormControlLabel
@@ -29,6 +47,7 @@ function FilterGender(props) {
                 onChange={(event) => props.setMaleChecked(event.target.checked)}
                 name="maleChecked"
                 color="primary"
+                disabled={!props.genderEnable}
               />
             }
             label="Male"
@@ -44,6 +63,7 @@ function FilterGender(props) {
                 }
                 name="femaleChecked"
                 color="secondary"
+                disabled={!props.genderEnable}
               />
             }
             label="Female"
@@ -57,14 +77,17 @@ function FilterGender(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    genderEnable: state.genderEnable,
     maleChecked: state.maleChecked,
-    femaledChecked: state.femaleChecked,
+    femaleChecked: state.femaleChecked,
   };
 };
 
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setGenderEnable: (newGenderEnable) =>
+      dispatch({ type: "SET_GENDER_ENABLE", value: newGenderEnable }),
     setMaleChecked: (checked) =>
       dispatch({ type: "SET_MALE_CHECKED", value: checked }),
     setFemaleChecked: (checked) =>

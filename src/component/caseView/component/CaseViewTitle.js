@@ -24,7 +24,9 @@ export default function CaseViewTitle(props) {
   return (
     <div>
       <MuiDialogTitle>
-        <Typography variant="h6">{children}</Typography>
+        <div>
+          <Typography variant="h4">{children}</Typography>
+        </div>
         <IconButton
           aria-label="close"
           onClick={onClose}

@@ -5,22 +5,40 @@ import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   formGroup: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterAutoAntibodyPositiveNumber(props) {
   const classes = useStyles();
 
   return (
     <div>
-      <h4>Auto Antibody Positive</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Auto Antibody Positive</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.aaPositiveEnable}
+            onChange={(e) => props.setAAPositiveEnable(e.target.checked)}
+            name="aaPositiveEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
 
       <FormGroup row className={classes.formGroup}>
         <Box>
@@ -31,6 +49,7 @@ function FilterAutoAntibodyPositiveNumber(props) {
                 onChange={(event) => props.setZeroChecked(event.target.checked)}
                 name="zeroChecked"
                 color="default"
+                disabled={!props.aaPositiveEnable}
               />
             }
             label="0"
@@ -45,6 +64,7 @@ function FilterAutoAntibodyPositiveNumber(props) {
                 onChange={(event) => props.setOneChecked(event.target.checked)}
                 name="oneChecked"
                 color="default"
+                disabled={!props.aaPositiveEnable}
               />
             }
             label="1"
@@ -59,6 +79,7 @@ function FilterAutoAntibodyPositiveNumber(props) {
                 onChange={(event) => props.setTwoChecked(event.target.checked)}
                 name="twoChecked"
                 color="default"
+                disabled={!props.aaPositiveEnable}
               />
             }
             label="2"
@@ -75,6 +96,7 @@ function FilterAutoAntibodyPositiveNumber(props) {
                 }
                 name="threeChecked"
                 color="default"
+                disabled={!props.aaPositiveEnable}
               />
             }
             label="3"
@@ -89,6 +111,7 @@ function FilterAutoAntibodyPositiveNumber(props) {
                 onChange={(event) => props.setFourChecked(event.target.checked)}
                 name="fourChecked"
                 color="default"
+                disabled={!props.aaPositiveEnable}
               />
             }
             label="4"
@@ -102,6 +125,7 @@ function FilterAutoAntibodyPositiveNumber(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    aaPositiveEnable: state.aaPositiveEnable,
     zeroChecked: state.zeroChecked,
     oneChecked: state.oneChecked,
     twoChecked: state.twoChecked,
@@ -113,6 +137,8 @@ const mapStateToProps = (state) => {
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setAAPositiveEnable: (newEnable) =>
+      dispatch({ type: "SET_AA_POSITIVE_ENABLE", value: newEnable }),
     setZeroChecked: (checked) =>
       dispatch({ type: "SET_ZERO_CHECKED", value: checked }),
     setOneChecked: (checked) =>

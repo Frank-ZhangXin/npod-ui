@@ -1,10 +1,11 @@
 import React, { setState } from "react";
 import Select from "react-select";
 import { makeStyles } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   multiSelect: {
     width: "75%",
   },
@@ -13,7 +14,10 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center",
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 const options = [
   { value: "No Diabetes", label: "No Diabetes" },
@@ -56,7 +60,13 @@ function FilterDonorType(props) {
 
   return (
     <div>
-      <h4>Donor Type</h4>
+      <Box display="flex" justifyContent="flex-start">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Donor Type</Box>
+          </Typography>
+        </Box>
+      </Box>
       <Box className={classes.box}>
         <Select
           className={classes.multiSelect}

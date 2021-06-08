@@ -4,16 +4,21 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   slider: {
     width: "75%",
   },
   textfield: {
     width: 45,
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterAge(props) {
   const classes = useStyles();
@@ -42,12 +47,27 @@ function FilterAge(props) {
 
   return (
     <div>
-      <h4>Age Range</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Age Range</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.ageEnable}
+            onChange={(e) => props.setAgeEnable(e.target.checked)}
+            name="ageEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
 
       <Slider
         className={classes.slider}
         value={props.ageRange}
         onChange={handleAgeRangeSliderChange}
+        disabled={!props.ageEnable}
         valueLabelDisplay="auto"
         min={0}
         max={95}
@@ -59,7 +79,7 @@ function FilterAge(props) {
             className={classes.textfield}
             id="min-age-input"
             label="Start"
-            // defaultValue={props.ageMin}
+            disabled={!props.ageEnable}
             value={props.ageMin}
             margin="dense"
             onChange={handleMinAgeInputChange}
@@ -76,7 +96,7 @@ function FilterAge(props) {
             className={classes.textfield}
             id="min-age-input"
             label="To"
-            // defaultValue={props.ageMax}
+            disabled={!props.ageEnable}
             value={props.ageMax}
             margin="dense"
             onChange={handleMaxAgeInputChange}
@@ -96,6 +116,7 @@ function FilterAge(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    ageEnable: state.ageEnable,
     ageRange: state.ageRange,
     ageMin: state.ageMin,
     ageMax: state.ageMax,
@@ -105,6 +126,8 @@ const mapStateToProps = (state) => {
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setAgeEnable: (newAgeEnable) =>
+      dispatch({ type: "SET_AGE_ENABLE", value: newAgeEnable }),
     setAgeRange: (newAgeRange) =>
       dispatch({ type: "SET_AGE_RANGE", value: newAgeRange }),
     setAgeMin: (newAgeMin) =>

@@ -1,0 +1,82 @@
+[
+  {
+    "donor_type_id": 1,
+    "name": "Autoantibody Positive"
+  },
+  {
+    "donor_type_id": 2,
+    "name": "Type 1 Diabetes"
+  },
+  {
+    "donor_type_id": 3,
+    "name": "Type 1 Diabetes Joslin Medalist"
+  },
+  {
+    "donor_type_id": 4,
+    "name": "Type 2 Diabetes"
+  },
+  {
+    "donor_type_id": 5,
+    "name": "No Diabetes"
+  },
+  {
+    "donor_type_id": 6,
+    "name": "Gestational Diabetes"
+  },
+  {
+    "donor_type_id": 7,
+    "name": "Pregnancy"
+  },
+  {
+    "donor_type_id": 8,
+    "name": "Other"
+  },
+  {
+    "donor_type_id": 9,
+    "name": "Pending"
+  },
+  {
+    "donor_type_id": 10,
+    "name": "Autoab Pos by screening"
+  },
+  {
+    "donor_type_id": 11,
+    "name": "Preclinical T2D"
+  },
+  {
+    "donor_type_id": 12,
+    "name": "Cystic Fibrosis"
+  },
+  {
+    "donor_type_id": 13,
+    "name": "Fulminant Type 1 Diabetes"
+  },
+  {
+    "donor_type_id": 14,
+    "name": "Transplant"
+  },
+  {
+    "donor_type_id": 16,
+    "name": "Monogenic Diabetes"
+  },
+  {
+    "donor_type_id": 18,
+    "name": "T2D+Incretin"
+  },
+  {
+    "donor_type_id": 20,
+    "name": "Gastric Bypass"
+  },
+  {
+    "donor_type_id": 21,
+    "name": "Ketosis-Prone Diabetes"
+  },
+  {
+    "donor_type_id": 23,
+    "name": "Other - Diabetes"
+  },
+  {
+    "donor_type_id": 24,
+    "name": "Other - No Diabetes"
+  }
+]

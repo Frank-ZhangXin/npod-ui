@@ -4,16 +4,21 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import TextField from "@material-ui/core/TextField";
+import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   slider: {
     width: "75%",
   },
   textfield: {
     width: 45,
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterHbA1c(props) {
   const classes = useStyles();
@@ -44,12 +49,27 @@ function FilterHbA1c(props) {
 
   return (
     <div>
-      <h4>Hb1A1c % Range</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Hb1A1c % Range</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.hEnable}
+            onChange={(e) => props.setHEnable(e.target.checked)}
+            name="bmiEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
 
       <Slider
         className={classes.slider}
         value={props.hRange}
         onChange={handleAgeRangeSliderChange}
+        disabled={!props.hEnable}
         valueLabelDisplay="auto"
         min={2.0}
         max={20.0}
@@ -62,7 +82,7 @@ function FilterHbA1c(props) {
             className={classes.textfield}
             id="min-h-input"
             label="Start"
-            // defaultValue={props.hMin}
+            disabled={!props.hEnable}
             value={props.hMin}
             margin="dense"
             onChange={handleMinHInputChange}
@@ -79,7 +99,7 @@ function FilterHbA1c(props) {
             className={classes.textfield}
             id="min-h-input"
             label="To"
-            // defaultValue={props.hMax}
+            disabled={!props.hEnable}
             value={props.hMax}
             margin="dense"
             onChange={handleMaxHInputChange}
@@ -99,6 +119,7 @@ function FilterHbA1c(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    hEnable: state.hEnable,
     hRange: state.hRange,
     hMin: state.hMin,
     hMax: state.hMax,
@@ -108,6 +129,8 @@ const mapStateToProps = (state) => {
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setHEnable: (newHEnable) =>
+      dispatch({ type: "SET_H_ENABLE", value: newHEnable }),
     setHRange: (newHRange) =>
       dispatch({ type: "SET_H_RANGE", value: newHRange }),
     setHMin: (newHMin) => dispatch({ type: "SET_H_MIN", value: newHMin }),

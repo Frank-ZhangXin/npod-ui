@@ -5,21 +5,41 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Switch from "@material-ui/core/Switch";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   formGroup: {
     alignItems: "center",
     justifyContent: "center",
   },
-});
+  title: {
+    margin: theme.spacing(3),
+  },
+}));
 
 function FilterAutoAntiboy(props) {
   const classes = useStyles();
 
   return (
     <div>
-      <h4>Auto Antibody</h4>
+      <Box display="flex" justifyContent="space-between">
+        <Box>
+          <Typography variant="h6" className={classes.title}>
+            <Box fontWeight="fontWeightBold">Auto Antibody</Box>
+          </Typography>
+        </Box>
+        <Box>
+          <Switch
+            checked={props.aaEnable}
+            onChange={(e) => props.setAAEnable(e.target.checked)}
+            name="autoAntibodyEnableSwitch"
+            className={classes.title}
+          />
+        </Box>
+      </Box>
+
       <FormGroup className={classes.formGroup}>
         {/* GADA Positive and Negative */}
         <Grid container spacing={0} alignItems="center" justify="space-evenly">
@@ -34,6 +54,7 @@ function FilterAutoAntiboy(props) {
                   onChange={(event) => props.setGadaP(event.target.checked)}
                   name="gadaP"
                   color="primary"
+                  disabled={!props.aaEnable}
                 />
               }
               label="+"
@@ -66,6 +87,7 @@ function FilterAutoAntiboy(props) {
                   onChange={(event) => props.setIa2aP(event.target.checked)}
                   name="ia2aP"
                   color="primary"
+                  disabled={!props.aaEnable}
                 />
               }
               label="+"
@@ -98,6 +120,7 @@ function FilterAutoAntiboy(props) {
                   onChange={(event) => props.setMiaaP(event.target.checked)}
                   name="miaaP"
                   color="primary"
+                  disabled={!props.aaEnable}
                 />
               }
               label="+"
@@ -130,6 +153,7 @@ function FilterAutoAntiboy(props) {
                   onChange={(event) => props.setZnt8aP(event.target.checked)}
                   name="znt8aP"
                   color="primary"
+                  disabled={!props.aaEnable}
                 />
               }
               label="+"
@@ -157,6 +181,7 @@ function FilterAutoAntiboy(props) {
 // subscribe
 const mapStateToProps = (state) => {
   return {
+    aaEnable: state.aaEnable,
     gadaP: state.gadaP,
     gadaN: state.gadaN,
     ia2aP: state.ia2aP,
@@ -171,6 +196,8 @@ const mapStateToProps = (state) => {
 // update
 const mapDispatchToProps = (dispatch) => {
   return {
+    setAAEnable: (newEnable) =>
+      dispatch({ type: "SET_AA_ENABLE", value: newEnable }),
     setGadaP: (checked) => dispatch({ type: "SET_GADAP", value: checked }),
     setGadaN: (checked) => dispatch({ type: "SET_GADAN", value: checked }),
     setIa2aP: (checked) => dispatch({ type: "SET_IA2AP", value: checked }),

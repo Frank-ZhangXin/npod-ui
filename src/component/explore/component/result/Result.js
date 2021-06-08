@@ -6,7 +6,7 @@ import Box from "@material-ui/core/Box";
 import { connect } from "react-redux";
 import Search from "./component/Search";
 import FetchRawData from "./component/FetchRawData";
-import CaseView from "./../../../caseView/CaseView";
+import CaseView from "../../../CaseView/CaseView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,11 +39,9 @@ function Result(props) {
   return (
     <div>
       {/* Fetch raw data */}
-      {/* <FetchRawData /> */}
-      <Typography variant="h3">SEARCH REASULT</Typography>
+      <FetchRawData />
       {/* Show search result */}
       <Search setDialogue={handleSetDialogue} />
-      {console.log(open)}
       <CaseView open={open} setDialogue={handleSetDialogue} />
     </div>
   );
